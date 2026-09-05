@@ -1,0 +1,73 @@
+/* ==========================================================================
+   SpeedQuiz Responsive & Mobile Optimizations (responsive.css)
+   Mobile First, Touch-Friendly, Safe-Area insets
+   ========================================================================== */
+
+/* スマホタッチ操作の最適化 */
+html, body {
+  touch-action: manipulation;
+  overscroll-behavior-y: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+button, input, select {
+  font-family: inherit;
+  font-size: 16px; /* iOSでズームインしないよう16px以上確保 */
+}
+
+/* 小型スマホ（iPhone SE, 横幅380px以下）のレイアウト調整 */
+@media screen and (max-width: 380px) {
+  .app-title {
+    font-size: 2rem;
+  }
+
+  .q-text {
+    font-size: 1.15rem;
+    line-height: 1.45;
+  }
+
+  .ans-btn {
+    padding: 16px 8px;
+    font-size: 1.4rem;
+  }
+
+  .mode-grid {
+    gap: 8px;
+  }
+
+  .mode-card {
+    padding: 10px 8px;
+  }
+
+  .score-stats-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .diag-meta-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* タブレット・PCデスクトップでの見栄え（スマホフレーム感） */
+@media screen and (min-width: 600px) {
+  body {
+    background-color: #050608;
+    display: flex;
+    justify-content: center;
+  }
+
+  .app-container {
+    width: 480px;
+    border-left: 1px solid var(--border-glass);
+    border-right: 1px solid var(--border-glass);
+    background: #0b0c10;
+    box-shadow: 0 0 60px rgba(0, 0, 0, 0.7);
+    margin: 0 auto;
+  }
+
+  .bottom-nav {
+    width: 480px;
+    left: auto;
+    right: auto;
+  }
+}

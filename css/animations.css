@@ -1,0 +1,160 @@
+/* ==========================================================================
+   SpeedQuiz Animation System (animations.css)
+   High-performance GPU accelerated animations
+   ========================================================================== */
+
+/* 正解時フラッシュ */
+.screen-flash {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 998;
+}
+
+.flash-success {
+  background: radial-gradient(circle, rgba(0, 245, 212, 0.45) 0%, rgba(56, 176, 0, 0.15) 70%, transparent 100%);
+  animation: flash-fade 0.22s ease-out forwards;
+}
+
+@keyframes flash-fade {
+  0% { opacity: 1; transform: scale(0.98); }
+  100% { opacity: 0; transform: scale(1.02); }
+}
+
+/* 画面シェイク（不正解・クラッシュ時） */
+.screen-shake {
+  animation: violent-shake 0.35s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+@keyframes violent-shake {
+  10%, 90% { transform: translate3d(-4px, 2px, 0); }
+  20%, 80% { transform: translate3d(5px, -3px, 0); }
+  30%, 50%, 70% { transform: translate3d(-6px, 4px, 0); }
+  40%, 60% { transform: translate3d(6px, -4px, 0); }
+}
+
+/* 警告帯フラッシュ（難問ボーナスカットイン） */
+.warning-flash {
+  animation: warning-pulse 0.4s infinite alternate ease-in-out;
+}
+
+@keyframes warning-pulse {
+  0% {
+    background: rgba(255, 0, 84, 0.95);
+    box-shadow: 0 0 20px rgba(255, 0, 84, 0.8);
+    transform: translateY(-50%) scale(0.98);
+  }
+  100% {
+    background: rgba(200, 0, 40, 0.98);
+    box-shadow: 0 0 45px rgba(255, 0, 84, 1);
+    transform: translateY(-50%) scale(1.02);
+  }
+}
+
+/* フィーバー中エフェクト */
+.in-fever {
+  position: relative;
+}
+
+.in-fever::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  border: 4px solid var(--accent-yellow);
+  box-shadow: inset 0 0 35px rgba(254, 228, 64, 0.45);
+  pointer-events: none;
+  z-index: 900;
+  animation: fever-border-pulse 0.6s infinite alternate;
+}
+
+@keyframes fever-border-pulse {
+  0% {
+    border-color: #fee440;
+    box-shadow: inset 0 0 25px rgba(254, 228, 64, 0.3);
+  }
+  100% {
+    border-color: #f72585;
+    box-shadow: inset 0 0 45px rgba(247, 37, 133, 0.55);
+  }
+}
+
+@keyframes fever-glow {
+  0% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 6px rgba(254, 228, 64, 0.8));
+  }
+  100% {
+    transform: scale(1.08);
+    filter: drop-shadow(0 0 16px rgba(247, 37, 133, 1));
+  }
+}
+
+/* フローティングスコアアニメーション */
+.floating-score {
+  position: absolute;
+  top: -10px;
+  right: 10px;
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: var(--accent-yellow);
+  text-shadow: 0 0 10px rgba(254, 228, 64, 0.8);
+  font-family: var(--font-mono);
+  pointer-events: none;
+  animation: float-up 0.65s ease-out forwards;
+}
+
+@keyframes float-up {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-24px) scale(1.2);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-40px) scale(1.3);
+  }
+}
+
+/* スワイプアニメーション */
+.swipe-left {
+  animation: swipe-left-out 0.15s ease-out forwards;
+}
+
+.swipe-right {
+  animation: swipe-right-out 0.15s ease-out forwards;
+}
+
+@keyframes swipe-left-out {
+  0% { transform: translateX(0) rotate(0deg); opacity: 1; }
+  100% { transform: translateX(-80px) rotate(-8deg); opacity: 0.8; }
+}
+
+@keyframes swipe-right-out {
+  0% { transform: translateX(0) rotate(0deg); opacity: 1; }
+  100% { transform: translateX(80px) rotate(8deg); opacity: 0.8; }
+}
+
+/* パルス */
+.pulse {
+  animation: pulse-badge 0.3s ease-in-out;
+}
+
+@keyframes pulse-badge {
+  0% { transform: scale(0.9); }
+  50% { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+
+@keyframes pulse-danger {
+  0% { opacity: 0.6; transform: scale(0.98); }
+  100% { opacity: 1; transform: scale(1.05); }
+}

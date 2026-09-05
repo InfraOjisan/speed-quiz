@@ -1,0 +1,1802 @@
+[
+  {
+    "id": "SC-001",
+    "category": "小中復習",
+    "subcategory": "算数・数学",
+    "question": "「0」は自然数である。",
+    "answer": "No",
+    "answer_bool": false,
+    "explanation": "自然数は正の整数（1, 2, 3...）であり、0は自然数に含まれません。"
+  },
+  {
+    "id": "SC-002",
+    "category": "小中復習",
+    "subcategory": "算数・数学",
+    "question": "もっとも小さい素数は「2」である。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "素数は1とその数自身の2つの正の約数を持つ数。1は素数ではなく、2が最小かつ唯一の偶数の素数です。"
+  },
+  {
+    "id": "SC-003",
+    "category": "小中復習",
+    "subcategory": "算数・数学",
+    "question": "三角形の内角の和は180度である。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "平面上の三角形の内角の和は常に180度です。"
+  },
+  {
+    "id": "SC-004",
+    "category": "小中復習",
+    "subcategory": "算数・数学",
+    "question": "すべての正方形は「ひし形」でもある。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "ひし形の定義は「4つの辺の長さがすべて等しい四角形」。正方形はこれを満たします。"
+  },
+  {
+    "id": "SC-005",
+    "category": "小中復習",
+    "subcategory": "算数・数学",
+    "question": "半径4cmの円の面積は、半径2cmの円の面積の「2倍」である。",
+    "answer": "No",
+    "answer_bool": false,
+    "explanation": "面積比は相似比の2乗になるため、半径が2倍なら面積は4倍（16πと4π）です。"
+  },
+  {
+    "id": "SC-006",
+    "category": "小中復習",
+    "subcategory": "算数・数学",
+    "question": "ある数 a に対し、(-a) の2乗と -(aの2乗) は必ず同じ値になる。",
+    "answer": "No",
+    "answer_bool": false,
+    "explanation": "(-3)^2 = 9 ですが、-(3^2) = -9 です。括弧の有無で符号が異なります。"
+  },
+  {
+    "id": "SC-007",
+    "category": "小中復習",
+    "subcategory": "算数・数学",
+    "question": "直角三角形の斜辺は、直角をはさむ2辺のどちらよりも長い。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "三平方の定理 (a^2 + b^2 = c^2) より、斜辺cは必ず最大辺になります。"
+  },
+  {
+    "id": "SC-008",
+    "category": "小中復習",
+    "subcategory": "算数・数学",
+    "question": "サイコロを3回振ってすべて1が出る確率は「1/18」である。",
+    "answer": "No",
+    "answer_bool": false,
+    "explanation": "1/6 × 1/6 × 1/6 = 1/216 です。"
+  },
+  {
+    "id": "SC-009",
+    "category": "小中復習",
+    "subcategory": "算数・数学",
+    "question": "1ha（ヘクタール）は、10000平方メートル（㎡）である。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "1a = 100㎡、1ha = 100a = 10,000㎡（100m×100mの正方形）です。"
+  },
+  {
+    "id": "SC-010",
+    "category": "小中復習",
+    "subcategory": "算数・数学",
+    "question": "ルート9（√9）は「±3」である。",
+    "answer": "No",
+    "answer_bool": false,
+    "explanation": "√9 は正の平方根を表す記号なので「3」です。「9の平方根」なら±3となります。"
+  },
+  {
+    "id": "SC-011",
+    "category": "小中復習",
+    "subcategory": "算数・数学",
+    "question": "2つの奇数を足すと、和は必ず偶数になる。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "(2m+1) + (2n+1) = 2(m+n+1) となり、必ず偶数になります。"
+  },
+  {
+    "id": "SC-012",
+    "category": "小中復習",
+    "subcategory": "算数・数学",
+    "question": "時速36kmで走る車は、秒速に直すと「秒速10m」である。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "36,000m ÷ 3600秒 = 秒速10m です。"
+  },
+  {
+    "id": "SC-013",
+    "category": "小中復習",
+    "subcategory": "算数・数学",
+    "question": "台形の面積は「（上底＋下底）× 高さ ÷ 2」で求められる。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "台形の公式として正しいです。"
+  },
+  {
+    "id": "SC-014",
+    "category": "小中復習",
+    "subcategory": "算数・数学",
+    "question": "正五角形の1つの内角の大きさは「120度」である。",
+    "answer": "No",
+    "answer_bool": false,
+    "explanation": "五角形の内角の和は540度。正五角形の1つの内角は 540 ÷ 5 = 108度です（120度は正六角形）。"
+  },
+  {
+    "id": "SC-015",
+    "category": "小中復習",
+    "subcategory": "算数・数学",
+    "question": "定価1000円の品物を2割引で買ったときの支払額は「200円」である。",
+    "answer": "No",
+    "answer_bool": false,
+    "explanation": "引かれる額が200円で、支払う金額は「800円」です。"
+  },
+  {
+    "id": "SC-016",
+    "category": "小中復習",
+    "subcategory": "算数・数学",
+    "question": "反比例のグラフ（y = a/x）の形は「放物線」と呼ばれる。",
+    "answer": "No",
+    "answer_bool": false,
+    "explanation": "反比例のグラフは「双曲線」です（放物線は y = ax^2 など）。"
+  },
+  {
+    "id": "SC-017",
+    "category": "小中復習",
+    "subcategory": "算数・数学",
+    "question": "1リットル（L）は 1000立方センチメートル（㎤）である。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "1辺10cmの立方体の体積（10×10×10=1000㎤）が1Lです。"
+  },
+  {
+    "id": "SC-018",
+    "category": "小中復習",
+    "subcategory": "算数・数学",
+    "question": "2の4乗（2⁴）は「16」である。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "2 × 2 × 2 × 2 = 16 です。"
+  },
+  {
+    "id": "SC-019",
+    "category": "小中復習",
+    "subcategory": "算数・数学",
+    "question": "円周率は割り切れない無限小数（無理数）である。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "円周率πは分数で表せない無理数で、小数点以下が無限に続きます。"
+  },
+  {
+    "id": "SC-020",
+    "category": "小中復習",
+    "subcategory": "算数・数学",
+    "question": "食塩5gを水95gに溶かした食塩水の濃度は「5%」である。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "食塩水の重さは 5g + 95g = 100g。濃度は 5 ÷ 100 × 100 = 5% です。"
+  },
+  {
+    "id": "SC-021",
+    "category": "小中復習",
+    "subcategory": "理科",
+    "question": "植物の光合成では、二酸化炭素を吸って酸素を出す。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "光合成は二酸化炭素と水からデンプンと酸素をつくり出します。"
+  },
+  {
+    "id": "SC-022",
+    "category": "小中復習",
+    "subcategory": "理科",
+    "question": "植物は昼間は光合成だけを行い、呼吸は一切していない。",
+    "answer": "No",
+    "answer_bool": false,
+    "explanation": "呼吸は昼夜を問わず常に行っています（昼は光合成量が呼吸量を上回るため見かけ上光合成が目立つだけ）。"
+  },
+  {
+    "id": "SC-023",
+    "category": "小中復習",
+    "subcategory": "理科",
+    "question": "リトマス試験紙が「赤色から青色」に変わったら酸性である。",
+    "answer": "No",
+    "answer_bool": false,
+    "explanation": "赤→青は「アルカリ性」です（酸性は青→赤）。「信号が赤になって危険（酸）」と覚えます。"
+  },
+  {
+    "id": "SC-024",
+    "category": "小中復習",
+    "subcategory": "理科",
+    "question": "水が氷になると体積は増えるが、質量（重さ）は変わらない。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "水は凍ると隙間のある結晶構造を作るため体積が増えますが、分子の数は同じなので重さは変わりません。"
+  },
+  {
+    "id": "SC-025",
+    "category": "小中復習",
+    "subcategory": "理科",
+    "question": "ヒトの心臓の部屋は「2心房2心室」の4つに分かれている。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "ヒトなど哺乳類・鳥類の心臓は右心房・右心室・左心房・左心室の4室構造です。"
+  },
+  {
+    "id": "SC-026",
+    "category": "小中復習",
+    "subcategory": "理科",
+    "question": "北極星は、地球の公転に伴って夜空を大きく移動する。",
+    "answer": "No",
+    "answer_bool": false,
+    "explanation": "地軸の延長線（天の北極）のほぼ真上にあるため、一年中ほとんど位置が動きません。"
+  },
+  {
+    "id": "SC-027",
+    "category": "小中復習",
+    "subcategory": "理科",
+    "question": "塩酸にスチールウール（鉄）を入れると発生する気体は「水素」である。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "金属と酸が反応すると水素ガスが発生します。"
+  },
+  {
+    "id": "SC-028",
+    "category": "小中復習",
+    "subcategory": "理科",
+    "question": "月が満ち欠けして見えるのは、月自身が自転して形を変えているからである。",
+    "answer": "No",
+    "answer_bool": false,
+    "explanation": "太陽・月・地球の位置関係が変化し、地球から見える太陽光の反射面の角度が変わるためです。"
+  },
+  {
+    "id": "SC-029",
+    "category": "小中復習",
+    "subcategory": "理科",
+    "question": "地震の揺れのうち、先に伝わってくる初期微動を起こす波は「P波」である。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "Primary（最初の）波であるP波が縦波で速く伝わり、Secondary波のS波が後から主要動を起こします。"
+  },
+  {
+    "id": "SC-030",
+    "category": "小中復習",
+    "subcategory": "理科",
+    "question": "酸素自体は激しく燃える性質（可燃性）を持っている。",
+    "answer": "No",
+    "answer_bool": false,
+    "explanation": "酸素はものを燃やすのを助ける「助燃性」を持ちますが、酸素自身が燃える（可燃性）わけではありません。"
+  },
+  {
+    "id": "SC-031",
+    "category": "小中復習",
+    "subcategory": "理科",
+    "question": "昆虫の体は「頭部・胸部・腹部」の3つに分かれ、足は胸部から6本生えている。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "昆虫の定義として正しいです。足はすべて胸部から出ています。"
+  },
+  {
+    "id": "SC-032",
+    "category": "小中復習",
+    "subcategory": "理科",
+    "question": "音は真空中でも光と同じスピードで伝わる。",
+    "answer": "No",
+    "answer_bool": false,
+    "explanation": "音は空気などの媒質の振動によって伝わるため、真空中では伝わりません。"
+  },
+  {
+    "id": "SC-033",
+    "category": "小中復習",
+    "subcategory": "理科",
+    "question": "直列回路において、各電球を流れる電流の強さはどこも同じである。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "枝分かれのない直列回路では、回路のどの点を測っても流れる電流は等しいです。"
+  },
+  {
+    "id": "SC-034",
+    "category": "小中復習",
+    "subcategory": "理科",
+    "question": "凸レンズを通してスクリーンに実像が映るとき、その像は上下左右が逆さである。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "凸レンズによる実像は、光が交差するため「倒立（上下左右が逆）」になります。"
+  },
+  {
+    "id": "SC-035",
+    "category": "小中復習",
+    "subcategory": "理科",
+    "question": "消化酵素の「アミラーゼ」は主にタンパク質を分解する。",
+    "answer": "No",
+    "answer_bool": false,
+    "explanation": "アミラーゼは「デンプン（炭水化物）」を分解します。タンパク質を分解するのはペプシンやトリプシンです。"
+  },
+  {
+    "id": "SC-036",
+    "category": "小中復習",
+    "subcategory": "理科",
+    "question": "動滑車を使うと、物体を持ち上げるのに必要な力は半分になるが、引く距離は2倍になる。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "仕事の原理により、必要な力は1/2になりますが、紐を引く距離は2倍になります。"
+  },
+  {
+    "id": "SC-037",
+    "category": "小中復習",
+    "subcategory": "理科",
+    "question": "二酸化炭素を水に溶かした水溶液はアルカリ性を示す。",
+    "answer": "No",
+    "answer_bool": false,
+    "explanation": "二酸化炭素が水に溶けると炭酸になり、弱酸性を示します。"
+  },
+  {
+    "id": "SC-038",
+    "category": "小中復習",
+    "subcategory": "理科",
+    "question": "顕微鏡で倍率を高くすると、視野は広く明るくなる。",
+    "answer": "No",
+    "answer_bool": false,
+    "explanation": "高倍率にすると視野は「狭く、暗く」なります。"
+  },
+  {
+    "id": "SC-039",
+    "category": "小中復習",
+    "subcategory": "理科",
+    "question": "ヒトの呼吸器官において、気管の先端にある無数の小さな袋を「肺胞」という。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "肺胞が無数にあることで表面積を広げ、効率よく気体交換を行っています。"
+  },
+  {
+    "id": "SC-040",
+    "category": "小中復習",
+    "subcategory": "理科",
+    "question": "化学変化で酸化物から酸素が奪われる反応を「還元」という。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "酸素と化合するのが酸化、酸素が奪われるのが還元です。"
+  },
+  {
+    "id": "SC-041",
+    "category": "小中復習",
+    "subcategory": "社会",
+    "question": "聖徳太子が定めた「冠位十二階」は、家柄に関係なく才能ある登用を目指した。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "血筋や家柄にとらわれず個人の才能や功績に応じて冠を授ける制度でした。"
+  },
+  {
+    "id": "SC-042",
+    "category": "小中復習",
+    "subcategory": "社会",
+    "question": "鎌倉幕府を開いた人物は「源義経」である。",
+    "answer": "No",
+    "answer_bool": false,
+    "explanation": "鎌倉幕府を開いたのは兄の「源頼朝」です。"
+  },
+  {
+    "id": "SC-043",
+    "category": "小中復習",
+    "subcategory": "社会",
+    "question": "日本で最初の本格的な貨幣として鋳造されたのは「和同開珎」である。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "708年に唐の開元通宝にならって鋳造された和同開珎（富本銭の議論もありますが公認貨幣として出題定番）。"
+  },
+  {
+    "id": "SC-044",
+    "category": "小中復習",
+    "subcategory": "社会",
+    "question": "本能寺の変で織田信長を討ったのは「明智光秀」である。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "1582年、明智光秀が京都・本能寺で織田信長を急襲しました。"
+  },
+  {
+    "id": "SC-045",
+    "category": "小中復習",
+    "subcategory": "社会",
+    "question": "江戸幕府の「武家諸法度」を最初に発布したのは徳川家光である。",
+    "answer": "No",
+    "answer_bool": false,
+    "explanation": "最初に発布したのは2代将軍「徳川秀忠」（家康の隠居期）です。参勤交代を制度化したのが3代家光です。"
+  },
+  {
+    "id": "SC-046",
+    "category": "小中復習",
+    "subcategory": "社会",
+    "question": "日本で最も面積の広い都道府県は「北海道」である。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "北海道が約83,424㎢で全国最大、2位は岩手県です。"
+  },
+  {
+    "id": "SC-047",
+    "category": "小中復習",
+    "subcategory": "社会",
+    "question": "本州と四国を結ぶ橋（本州四国連絡橋）のルートは全部で「5つ」ある。",
+    "answer": "No",
+    "answer_bool": false,
+    "explanation": "「神戸・鳴門」「児島・坂出（瀬戸大橋）」「尾道・今治（しまなみ海道）」の「3ルート」です。"
+  },
+  {
+    "id": "SC-048",
+    "category": "小中復習",
+    "subcategory": "社会",
+    "question": "日本の標準時子午線は「東経135度」で、兵庫県明石市などを通る。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "東経135度の子午線が日本の標準時（JST）の基準です。"
+  },
+  {
+    "id": "SC-049",
+    "category": "小中復習",
+    "subcategory": "社会",
+    "question": "日本国憲法の三大原理は「国民主権」「基本的人権の尊重」「平和主義」である。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "中学公民で必ず習う日本国憲法の3つの基本原理です。"
+  },
+  {
+    "id": "SC-050",
+    "category": "小中復習",
+    "subcategory": "社会",
+    "question": "日本の国会は「衆議院」と「貴族院」の二院制である。",
+    "answer": "No",
+    "answer_bool": false,
+    "explanation": "大日本帝国憲法下では貴族院でしたが、現行憲法では「衆議院」と「参議院」です。"
+  },
+  {
+    "id": "SC-051",
+    "category": "小中復習",
+    "subcategory": "社会",
+    "question": "裁判員制度の対象となるのは、民事裁判のみである。",
+    "answer": "No",
+    "answer_bool": false,
+    "explanation": "裁判員制度は重大な「刑事裁判」の第一審に市民が参加する制度です。"
+  },
+  {
+    "id": "SC-052",
+    "category": "小中復習",
+    "subcategory": "社会",
+    "question": "ペリーが黒船を率いて来航したのは「下田」ではなく「浦賀」である。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "1853年に最初にペリーが来航したのは浦賀（神奈川県）です（後に条約で下田・箱館が開港）。"
+  },
+  {
+    "id": "SC-053",
+    "category": "小中復習",
+    "subcategory": "社会",
+    "question": "日本で一番長い川は「利根川」である。",
+    "answer": "No",
+    "answer_bool": false,
+    "explanation": "日本で一番長い川は「信濃川」（367km）です（流域面積が一番広いのが利根川）。"
+  },
+  {
+    "id": "SC-054",
+    "category": "小中復習",
+    "subcategory": "社会",
+    "question": "三権分立における「立法権」を持つのは内閣である。",
+    "answer": "No",
+    "answer_bool": false,
+    "explanation": "立法権は「国会」、行政権が「内閣」、司法権が「裁判所」です。"
+  },
+  {
+    "id": "SC-055",
+    "category": "小中復習",
+    "subcategory": "社会",
+    "question": "日本最南端の島は「沖ノ鳥島」である。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "最南端は沖ノ鳥島、最東端は南鳥島、最西端は与那国島、最北端は択捉島です。"
+  },
+  {
+    "id": "SC-056",
+    "category": "小中復習",
+    "subcategory": "社会",
+    "question": "杉田玄白らがオランダの解剖書を翻訳して出版したのは『解体新書』である。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "ドイツ人クルムスの『ターヘル・アナトミア』を翻訳し1774年に刊行しました。"
+  },
+  {
+    "id": "SC-057",
+    "category": "小中復習",
+    "subcategory": "社会",
+    "question": "世界遺産の「法隆寺」がある都道府県は京都府である。",
+    "answer": "No",
+    "answer_bool": false,
+    "explanation": "法隆寺があるのは「奈良県（斑鳩町）」です。"
+  },
+  {
+    "id": "SC-058",
+    "category": "小中復習",
+    "subcategory": "社会",
+    "question": "赤道直下の地域は一年中昼と夜の長さがほぼ等しい。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "赤道付近では季節による昼夜の長さの変動がほとんどなく、ほぼ12時間ずつです。"
+  },
+  {
+    "id": "SC-059",
+    "category": "小中復習",
+    "subcategory": "社会",
+    "question": "明治維新の「地租改正」では、税金は米ではなく「現金」で納めさせるようになった。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "土地の価格（地価）の3%（のち2.5%）を現金で納めさせ、国家財政を安定させました。"
+  },
+  {
+    "id": "SC-060",
+    "category": "小中復習",
+    "subcategory": "社会",
+    "question": "国連（国際連合）の本部はスイスのジュネーブにある。",
+    "answer": "No",
+    "answer_bool": false,
+    "explanation": "国際連合（国連）の本部はアメリカの「ニューヨーク」にあります（国際連盟の本部がジュネーブでした）。"
+  },
+  {
+    "id": "SC-061",
+    "category": "小中復習",
+    "subcategory": "国語",
+    "question": "「役不足」という言葉は、「自分の実力に対して役目が軽すぎる」という意味である。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "「本人の器量に対して役が軽すぎる」が本来の意味です。「力不足」と混同されやすい言葉です。"
+  },
+  {
+    "id": "SC-062",
+    "category": "小中復習",
+    "subcategory": "国語",
+    "question": "「情けは人のためならず」は、「人に情けをかけるとその人のためにならないから良くない」という意味である。",
+    "answer": "No",
+    "answer_bool": false,
+    "explanation": "本来は「人に情けをかけておけば、巡り巡って自分に良い報いが返ってくる」という意味です。"
+  },
+  {
+    "id": "SC-063",
+    "category": "小中復習",
+    "subcategory": "国語",
+    "question": "ことわざ「犬も歩けば棒に当たる」には、幸運に出会うという意味もある。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "災難に遭う意味だけでなく、「行動すれば思いがけない幸運に巡り合う」という意味でも使われます。"
+  },
+  {
+    "id": "SC-064",
+    "category": "小中復習",
+    "subcategory": "国語",
+    "question": "日本語の品詞で「動詞・形容詞・形容動詞」の3つをまとめて「用言」という。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "活用があり単独で述語になれる単語を「用言」と呼びます（名詞などは体言）。"
+  },
+  {
+    "id": "SC-065",
+    "category": "小中復習",
+    "subcategory": "国語",
+    "question": "漢字の「凸」と「凹」の画数は、どちらも「5画」である。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "「凸」も「凹」もどちらも5画です。漢字クイズの定番です。"
+  },
+  {
+    "id": "SC-066",
+    "category": "小中復習",
+    "subcategory": "国語",
+    "question": "助詞の「は」「が」「を」には、形が変わる「活用」がある。",
+    "answer": "No",
+    "answer_bool": false,
+    "explanation": "助詞と助動詞のうち、助動詞には活用がありますが、助詞には活用がありません。"
+  },
+  {
+    "id": "SC-067",
+    "category": "小中復習",
+    "subcategory": "国語",
+    "question": "夏目漱石の小説『坊っちゃん』の冒頭は「親譲りの無鉄砲で小供の時から損ばかりしている」である。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "『坊っちゃん』の有名な書き出しです（「吾輩は猫である。名前はまだ無い」と並ぶ名文）。"
+  },
+  {
+    "id": "SC-068",
+    "category": "小中復習",
+    "subcategory": "国語",
+    "question": "「的を射る（まとをいる）」と「的を得る（まとをえる）」のうち、本来正しいとされる慣用句は「的を射る」である。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "弓で的を射抜くことから「的を射る」が本来の表現です（近年は「得る」も使われますが国語辞書では「射る」が正調）。"
+  },
+  {
+    "id": "SC-069",
+    "category": "小中復習",
+    "subcategory": "国語",
+    "question": "「雨が降る」という文において、「降る」は文の成分でいう「述語」である。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "「雨が」が主語、「降る」が述語です。"
+  },
+  {
+    "id": "SC-070",
+    "category": "小中復習",
+    "subcategory": "国語",
+    "question": "対義語（反対語）において、「主観」の対義語は「悲観」である。",
+    "answer": "No",
+    "answer_bool": false,
+    "explanation": "「主観」の対義語は「客観」です（「悲観」の対義語は「楽観」）。"
+  },
+  {
+    "id": "SC-071",
+    "category": "小中復習",
+    "subcategory": "国語",
+    "question": "『平家物語』の冒頭「祇園精舎の鐘の声、諸行無常の響きあり」は、五七調のリズムである。",
+    "answer": "No",
+    "answer_bool": false,
+    "explanation": "「ぎおんしょうじゃの（7）かねのこえ（5）」と、七五調のリズムです。"
+  },
+  {
+    "id": "SC-072",
+    "category": "小中復習",
+    "subcategory": "国語",
+    "question": "「姑息（こそく）」という言葉の本来の意味は、「一時しのぎ」である。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "卑怯という意味で使われがちですが、本来は「一時しのぎ・その場しのぎ」という意味です。"
+  },
+  {
+    "id": "SC-073",
+    "category": "小中復習",
+    "subcategory": "国語",
+    "question": "俳句は「五・七・五」の17音、短歌は「五・七・五・七・七」の31音である。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "定型詩の基本ルールとして正しいです。"
+  },
+  {
+    "id": "SC-074",
+    "category": "小中復習",
+    "subcategory": "国語",
+    "question": "四字熟語「危機一髪」の「髪」の漢字は、「発」と書くのが正しい。",
+    "answer": "No",
+    "answer_bool": false,
+    "explanation": "「髪の毛1本ほどの差で危機に迫る」という意味なので「一髪」が正しいです。"
+  },
+  {
+    "id": "SC-075",
+    "category": "小中復習",
+    "subcategory": "国語",
+    "question": "清少納言が書いた随筆作品は『徒然草』である。",
+    "answer": "No",
+    "answer_bool": false,
+    "explanation": "清少納言は『枕草子』です。『徒然草』を書いたのは兼好法師（吉田兼好）です。"
+  },
+  {
+    "id": "SC-076",
+    "category": "小中復習",
+    "subcategory": "国語",
+    "question": "「鳥肌が立つ」という慣用句は、寒さや恐怖だけでなく、本来「深く感動したとき」にも使われていた表現である。",
+    "answer": "No",
+    "answer_bool": false,
+    "explanation": "本来は寒さや恐怖・嫌悪感に使う言葉であり、感動に対して使うのは近年広まった用法です。"
+  },
+  {
+    "id": "SC-077",
+    "category": "小中復習",
+    "subcategory": "国語",
+    "question": "漢文の返り点で、「レ点」は下から上へ1字だけ戻って読む記号である。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "レ点は下の1文字を先に読んでから上の文字に戻って読みます。"
+  },
+  {
+    "id": "SC-078",
+    "category": "小中復習",
+    "subcategory": "国語",
+    "question": "「わが輩は猫である」の「わが」は品詞分類でいうと連体詞である。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "体言（名詞）を修飾し、活用しない単語なので「連体詞」です。"
+  },
+  {
+    "id": "SC-079",
+    "category": "小中復習",
+    "subcategory": "国語",
+    "question": "同音異義語：「確信をツく」の漢字は「衝く」ではなく「突く」と書く。",
+    "answer": "No",
+    "answer_bool": false,
+    "explanation": "核心や要点を鋭く捉える場合は「衝く（核心を衝く）」が慣用的な正字とされます。"
+  },
+  {
+    "id": "SC-080",
+    "category": "小中復習",
+    "subcategory": "国語",
+    "question": "「破天荒」とは、「誰も成し得なかったことを初めて行うこと」という意味である。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "「豪快で無茶苦茶な人」という意味で誤用されがちですが、前人未到の偉業を成し遂げるのが本来の意味です。"
+  },
+  {
+    "id": "SC-081",
+    "category": "小中復習",
+    "subcategory": "英語",
+    "question": "英語の「yesterday（昨日）」は過去を表す言葉なので、現在完了形（have + 過去分詞）の文では一緒に使えない。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "yesterday や ago, when など明確な過去の時点を示す語は、現在完了形とは一緒に使えません。"
+  },
+  {
+    "id": "SC-082",
+    "category": "小中復習",
+    "subcategory": "英語",
+    "question": "動詞「teach」の過去形・過去分詞は「teached - teached」である。",
+    "answer": "No",
+    "answer_bool": false,
+    "explanation": "teach の過去形・過去分詞は不規則変化で「taught（トート）」です。"
+  },
+  {
+    "id": "SC-083",
+    "category": "小中復習",
+    "subcategory": "英語",
+    "question": "「私は毎日テニスをします」の英語は \"I play tennis everyday.\" より名詞を修飾しない副詞として \"every day\" と2語に分けるのが標準的である。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "everyday（1語）は「日常の」という形容詞（例: everyday life）。「毎日」という副詞は every day と分けるのが正しいです。"
+  },
+  {
+    "id": "SC-084",
+    "category": "小中復習",
+    "subcategory": "英語",
+    "question": "三人称単数の主語（he/she/itなど）で現在形のとき、動詞の語尾に「s」や「es」をつける。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "いわゆる「三単現のs」のルールです。"
+  },
+  {
+    "id": "SC-085",
+    "category": "小中復習",
+    "subcategory": "英語",
+    "question": "「apple」の前に置く不定冠詞は「a」ではなく「an」である。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "母音（発音が母音で始まる単語）の前には「an」を置きます（an apple）。"
+  },
+  {
+    "id": "SC-086",
+    "category": "小中復習",
+    "subcategory": "英語",
+    "question": "「must」と「don't have to」は、否定にした場合どちらも「〜してはいけない（禁止）」という意味になる。",
+    "answer": "No",
+    "answer_bool": false,
+    "explanation": "must not は「〜してはいけない（禁止）」ですが、don't have to は「〜する必要はない（不必要）」です。"
+  },
+  {
+    "id": "SC-087",
+    "category": "小中復習",
+    "subcategory": "英語",
+    "question": "受動態（受け身）の基本形は「be動詞 ＋ 動詞の過去分詞」である。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "「〜される」を表す受動態は be動詞 + 過去分詞 で表します。"
+  },
+  {
+    "id": "SC-088",
+    "category": "小中復習",
+    "subcategory": "英語",
+    "question": "英語の「information（情報）」は数えられない名詞（不可算名詞）なので、通常「an information」や「informations」とは言わない。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "information は不可算名詞（数えられない名詞）の代表格です。1つの情報は a piece of information と言います。"
+  },
+  {
+    "id": "SC-089",
+    "category": "小中復習",
+    "subcategory": "英語",
+    "question": "「He is taller than me.」の「taller」は形容詞の最上級である。",
+    "answer": "No",
+    "answer_bool": false,
+    "explanation": "taller は「比較級」です（最上級は tallest）。"
+  },
+  {
+    "id": "SC-090",
+    "category": "小中復習",
+    "subcategory": "英語",
+    "question": "動詞「listen」の後に目的語（音楽など）を置く場合、前置詞「to」が必要である（listen to music）。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "listen は自動詞なので、対象を置くには「listen to 〜」とする必要があります。"
+  },
+  {
+    "id": "SC-091",
+    "category": "小中復習",
+    "subcategory": "英語",
+    "question": "不定詞の名詞的用法「to + 動詞の原形」は、「〜すること」という意味になる。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "例：To play soccer is fun.（サッカーをすることは楽しい）。"
+  },
+  {
+    "id": "SC-092",
+    "category": "小中復習",
+    "subcategory": "英語",
+    "question": "「What time is it now?」と聞かれたときの返答の主語は「It」を使う。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "時間・天候・距離・明暗などを表すときの仮の主語は「It」を用います。"
+  },
+  {
+    "id": "SC-093",
+    "category": "小中復習",
+    "subcategory": "英語",
+    "question": "単語「Wednesday（水曜日）」の最初の「d」の文字は発音する。",
+    "answer": "No",
+    "answer_bool": false,
+    "explanation": "Wednesday の「d」は黙字（発音しない音）で、「ウェンズデイ」のように発音します。"
+  },
+  {
+    "id": "SC-094",
+    "category": "小中復習",
+    "subcategory": "英語",
+    "question": "「How many」の後には数えられない名詞（水やお金など）の単数形が続く。",
+    "answer": "No",
+    "answer_bool": false,
+    "explanation": "How many の後は「数えられる名詞の複数形」が来ます（数えられない名詞は How much）。"
+  },
+  {
+    "id": "SC-095",
+    "category": "小中復習",
+    "subcategory": "英語",
+    "question": "現在進行形（be動詞 + 〜ing）で「run」を進行形にするときは「runing」と書く。",
+    "answer": "No",
+    "answer_bool": false,
+    "explanation": "短母音＋子音字で終わるため、nを重ねて「running」と綴ります。"
+  },
+  {
+    "id": "SC-096",
+    "category": "小中復習",
+    "subcategory": "英語",
+    "question": "「look at」は視線を向けて見ること、「watch」は動くものをじっと注視することを表す。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "静止画や一点を見るのは look at、テレビやスポーツ観戦など動きを見るのは watch を使います。"
+  },
+  {
+    "id": "SC-097",
+    "category": "小中復習",
+    "subcategory": "英語",
+    "question": "「There is a cat under the table.」の主語は「There」である。",
+    "answer": "No",
+    "answer_bool": false,
+    "explanation": "There is 構文の真の主語は be動詞の後ろにある名詞「a cat」です。"
+  },
+  {
+    "id": "SC-098",
+    "category": "小中復習",
+    "subcategory": "英語",
+    "question": "助動詞（can, will, may など）の直後に置く動詞は、必ず「動詞の原形」である。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "主語が誰であっても助動詞の直後の動詞は原形になります。"
+  },
+  {
+    "id": "SC-099",
+    "category": "小中復習",
+    "subcategory": "英語",
+    "question": "「child（子ども）」の複数形は「childs」である。",
+    "answer": "No",
+    "answer_bool": false,
+    "explanation": "不規則変化名詞で、正しくは「children」です。"
+  },
+  {
+    "id": "SC-100",
+    "category": "小中復習",
+    "subcategory": "英語",
+    "question": "「May I help you?」に対する「Yes, please.」は自然な応答である。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "店員などの「いらっしゃいませ（お手伝いしましょうか？）」に対してお願いするときの定番の返答です。"
+  },
+  {
+    "id": "GE-001",
+    "category": "一般教養",
+    "subcategory": "政治",
+    "question": "日本の衆議院議員の任期は4年だが、参議院議員の任期は「6年」である。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "衆議院は4年（解散あり）、参議院は6年（解散なし、3年ごとに半数改選）です。"
+  },
+  {
+    "id": "GE-002",
+    "category": "一般教養",
+    "subcategory": "政治",
+    "question": "内閣総理大臣は、法律上「民間人（国会議員以外）」からも指名することができる。",
+    "answer": "No",
+    "answer_bool": false,
+    "explanation": "日本国憲法第67条により、内閣総理大臣は「国会議員の中から」指名されなければなりません。国務大臣の過半数も国会議員である必要があります。"
+  },
+  {
+    "id": "GE-003",
+    "category": "一般教養",
+    "subcategory": "政治",
+    "question": "最高裁判所の裁判官に対して国民が罷免の可否を審査する制度を「国民審査」という。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "衆議院議員総選挙と同時に行われる最高裁判所裁判官国民審査のことです。"
+  },
+  {
+    "id": "GE-004",
+    "category": "一般教養",
+    "subcategory": "政治",
+    "question": "日本の選挙権年齢は18歳以上だが、参議院議員に立候補できる被選挙権年齢は「25歳以上」である。",
+    "answer": "No",
+    "answer_bool": false,
+    "explanation": "参議院議員および都道府県知事の被選挙権年齢は「30歳以上」です（衆議院議員や市区町村長は25歳以上）。"
+  },
+  {
+    "id": "GE-005",
+    "category": "一般教養",
+    "subcategory": "政治",
+    "question": "国会において、予算の議決や条約の承認で衆議院と参議院の意見が一致しない場合、衆議院の優越が認められている。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "予算、条約の承認、内閣総理大臣の指名、法律案の再可決において衆議院の優越があります。"
+  },
+  {
+    "id": "GE-006",
+    "category": "一般教養",
+    "subcategory": "政治",
+    "question": "国連の安全保障理事会における常任理事国（5カ国）すべてに「拒否権」が認められている。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "米・英・仏・中・露の5常任理事国は、1国でも拒否権を行使すると実質決議が成立しません。"
+  },
+  {
+    "id": "GE-007",
+    "category": "一般教養",
+    "subcategory": "政治",
+    "question": "日本の地方自治において、都道府県知事に対するリコール（解職請求）を行う権利は認められていない。",
+    "answer": "No",
+    "answer_bool": false,
+    "explanation": "地方自治法に基づき、有権者の一定以上の署名を集めることで首長（知事・市町村長）のリコール請求が可能です。"
+  },
+  {
+    "id": "GE-008",
+    "category": "一般教養",
+    "subcategory": "政治",
+    "question": "日本国憲法の改正原案を発議するには、各議院の「総議員の過半数」の賛成が必要である。",
+    "answer": "No",
+    "answer_bool": false,
+    "explanation": "各議院の「総議員の3分の2以上」の賛成が必要です。その後国民投票で過半数の賛成を得る必要があります。"
+  },
+  {
+    "id": "GE-009",
+    "category": "一般教養",
+    "subcategory": "政治",
+    "question": "「法テラス（日本司法支援センター）」は、経済的に困窮している人等への法的支援を行う公的機関である。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "全国どこでも法的なトラブル解決に必要な情報やサービスを受けられるよう設立された公的法人です。"
+  },
+  {
+    "id": "GE-010",
+    "category": "一般教養",
+    "subcategory": "政治",
+    "question": "日本の内閣において、すべての国務大臣は文民（現役の自衛官等でない者）でなければならない。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "日本国憲法第66条第2項「総理大臣その他の国務大臣は、文民でなければならない」という文民統制（シビリアンコントロール）の原則です。"
+  },
+  {
+    "id": "GE-011",
+    "category": "一般教養",
+    "subcategory": "政治",
+    "question": "国際司法裁判所（ICJ）の本部は、ベルギーのブリュッセルにある。",
+    "answer": "No",
+    "answer_bool": false,
+    "explanation": "国際司法裁判所の本部はオランダの「ハーグ」にあります（平和宮）。"
+  },
+  {
+    "id": "GE-012",
+    "category": "一般教養",
+    "subcategory": "政治",
+    "question": "日本の裁判制度は、原則として1つの事件につき3回まで裁判を受けられる「三審制」をとっている。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "第一審・控訴審・上告審の原則三審制をとっています。"
+  },
+  {
+    "id": "GE-013",
+    "category": "一般教養",
+    "subcategory": "政治",
+    "question": "公職選挙法により、満18歳未満の未成年者が特定の候補者を応援する選挙運動を行うことは禁止されている。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "18歳未満の選挙運動（SNSでのリポストや応援呼びかけ含む）は公職選挙法で禁止されています。"
+  },
+  {
+    "id": "GE-014",
+    "category": "一般教養",
+    "subcategory": "政治",
+    "question": "国政調査権は、裁判所が内閣の違法性を調査するために持つ権限である。",
+    "answer": "No",
+    "answer_bool": false,
+    "explanation": "国政調査権（憲法62条）を持つのは「衆議院および参議院（国会）」です。"
+  },
+  {
+    "id": "GE-015",
+    "category": "一般教養",
+    "subcategory": "政治",
+    "question": "EU（欧州連合）加盟国は、すべての国が共通通貨「ユーロ」を導入しなければならない。",
+    "answer": "No",
+    "answer_bool": false,
+    "explanation": "スウェーデンやポーランドなど、EU加盟国であっても自国通貨（非ユーロ）を使い続けている国が存在します。"
+  },
+  {
+    "id": "GE-016",
+    "category": "一般教養",
+    "subcategory": "政治",
+    "question": "憲法に規定された「国民の三大義務」とは、勤労の義務、納税の義務、そして「教育を受けさせる義務」である。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "義務教育とは「子ども自身が勉強する義務」ではなく「保護者が子どもに普通教育を受けさせる義務」です。"
+  },
+  {
+    "id": "GE-017",
+    "category": "一般教養",
+    "subcategory": "政治",
+    "question": "日本の国会で毎年1月中に召集される、翌年度の予算案などを審議する国会を「臨時国会」という。",
+    "answer": "No",
+    "answer_bool": false,
+    "explanation": "毎年1月に召集されるのは「通常国会（常会）」です。内閣が必要と認めたときなどに召集されるのが臨時国会です。"
+  },
+  {
+    "id": "GE-018",
+    "category": "一般教養",
+    "subcategory": "政治",
+    "question": "プライバシーの権利や環境権のように、時代の変化に伴い新しく主張されるようになった権利を「新しい人権」という。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "憲法制定時には明文化されていなかったものの、憲法13条（幸福追求権）などを根拠に認められてきた権利です。"
+  },
+  {
+    "id": "GE-019",
+    "category": "一般教養",
+    "subcategory": "経済",
+    "question": "円相場が「1ドル＝150円」から「1ドル＝140円」になることを「円安」という。",
+    "answer": "No",
+    "answer_bool": false,
+    "explanation": "1ドルを得るのに必要な円が少なくなっているため、「円高」です。"
+  },
+  {
+    "id": "GE-020",
+    "category": "一般教養",
+    "subcategory": "経済",
+    "question": "日本銀行（中央銀行）の総裁の任期は「5年」である。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "日銀総裁および副総裁の任期は5年で、衆参両議院の同意を得て内閣が任命します。"
+  },
+  {
+    "id": "GE-021",
+    "category": "一般教養",
+    "subcategory": "経済",
+    "question": "国内総生産（GDP）には、日本企業が海外の現地工場で生産した製品の価値も含まれる。",
+    "answer": "No",
+    "answer_bool": false,
+    "explanation": "GDPは「国内」で生み出された付加価値の合計なので、海外工場の生産は含まれません（それはGNI/GNPに含まれます）。"
+  },
+  {
+    "id": "GE-022",
+    "category": "一般教養",
+    "subcategory": "経済",
+    "question": "日本銀行が発行する紙幣（日本銀行券）には、独立行政法人国立印刷局が製造している。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "紙幣は国立印刷局が印刷し、硬貨（貨幣）は独立行政法人造幣局が製造します。"
+  },
+  {
+    "id": "GE-023",
+    "category": "一般教養",
+    "subcategory": "経済",
+    "question": "インフレーション（インフレ）が進行すると、一般的にモノの値段が上がり、お金の価値は下がる。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "物価上昇＝貨幣価値の下落を意味します。"
+  },
+  {
+    "id": "GE-024",
+    "category": "一般教養",
+    "subcategory": "経済",
+    "question": "少額投資非課税制度「新NISA」では、投資によって得られた運用益や配当金に約20%の税金がかかる。",
+    "answer": "No",
+    "answer_bool": false,
+    "explanation": "NISAは利益が「非課税」になる制度です。通常は株式利益に約20.315%の税金がかかります。"
+  },
+  {
+    "id": "GE-025",
+    "category": "一般教養",
+    "subcategory": "経済",
+    "question": "株式会社の最高意思決定機関は、取締役が集まる「取締役会」である。",
+    "answer": "No",
+    "answer_bool": false,
+    "explanation": "株式会社の最高意思決定機関は株主で構成される「株主総会」です。"
+  },
+  {
+    "id": "GE-026",
+    "category": "一般教養",
+    "subcategory": "経済",
+    "question": "好景気のとき、中央銀行は景気の過熱を抑えるために金利（政策金利）を引き下げるのが一般的である。",
+    "answer": "No",
+    "answer_bool": false,
+    "explanation": "景気過熱やインフレを冷やすためには、金利を「引き上げ（利上げ）」て資金の借り入れを抑制します。"
+  },
+  {
+    "id": "GE-027",
+    "category": "一般教養",
+    "subcategory": "経済",
+    "question": "所得税のように、所得が高くなるほど税率が高くなる仕組みを「累進課税」という。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "富の再分配を目的として高所得者に高い税率を課す制度です。"
+  },
+  {
+    "id": "GE-028",
+    "category": "一般教養",
+    "subcategory": "経済",
+    "question": "市場において特定の1社だけが商品を供給している状態を「寡占」という。",
+    "answer": "No",
+    "answer_bool": false,
+    "explanation": "1社のみは「独占」です。少数の数社が支配している状態を「寡占」といいます。"
+  },
+  {
+    "id": "GE-029",
+    "category": "一般教養",
+    "subcategory": "経済",
+    "question": "公的年金制度において、現在の現役世代が納めた保険料を現在の高齢者の年金給付に充てる方式を「賦課方式」という。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "日本の公的年金は主に世代間で支え合う「賦課（ふか）方式」を基本としています。"
+  },
+  {
+    "id": "GE-030",
+    "category": "一般教養",
+    "subcategory": "経済",
+    "question": "「デリバティブ取引」とは、株式や債券などの原資産から派生した金融派生商品の取引のことである。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "先物取引、オプション取引、スワップ取引などがデリバティブに該当します。"
+  },
+  {
+    "id": "GE-031",
+    "category": "一般教養",
+    "subcategory": "経済",
+    "question": "日本で買い物をした際にかかる消費税の標準税率は10%、食料品などに適用される軽減税率は8%である。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "酒類や外食を除く飲食料品や定期購読の新聞には軽減税率8%が適用されています。"
+  },
+  {
+    "id": "GE-032",
+    "category": "一般教養",
+    "subcategory": "経済",
+    "question": "「コングロマリット」とは、互いに関連のない多種多様な業種・事業を傘下に持つ複合企業のことである。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "多角化戦略によりリスク分散や事業拡大を図る巨大複合企業を指します。"
+  },
+  {
+    "id": "GE-033",
+    "category": "一般教養",
+    "subcategory": "経済",
+    "question": "ビットコインなどの暗号資産は、日本銀行がその価値を保証している法定通貨である。",
+    "answer": "No",
+    "answer_bool": false,
+    "explanation": "暗号資産（仮想通貨）は中央銀行の後ろ盾がなく、需給によって価格が変動するデジタル資産です。"
+  },
+  {
+    "id": "GE-034",
+    "category": "一般教養",
+    "subcategory": "経済",
+    "question": "労働基準法で定められた法定労働時間の原則は、「1日8時間、1週40時間」である。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "労働基準法第32条で定められた原則的な労働時間の上限です。"
+  },
+  {
+    "id": "GE-035",
+    "category": "一般教養",
+    "subcategory": "経済",
+    "question": "企業の財務諸表の一つ「貸借対照表（B/S）」は、一定期間における企業の利益と損失を表したものである。",
+    "answer": "No",
+    "answer_bool": false,
+    "explanation": "期間の損益を表すのは「損益計算書（P/L）」です。貸借対照表（B/S）はある時点の資産・負債・純資産の状態を示します。"
+  },
+  {
+    "id": "GE-036",
+    "category": "一般教養",
+    "subcategory": "経済",
+    "question": "不景気で物が売れず、物価が下がり続ける現象を「スタグフレーション」という。",
+    "answer": "No",
+    "answer_bool": false,
+    "explanation": "物価下落と不況は「デフレーション」です。「スタグフレーション」は不況下であるにもかかわらず物価が高騰する現象です。"
+  },
+  {
+    "id": "GE-037",
+    "category": "一般教養",
+    "subcategory": "地理",
+    "question": "オーストラリアの首都はシドニーである。",
+    "answer": "No",
+    "answer_bool": false,
+    "explanation": "オーストラリアの首都は「キャンベラ」です（シドニーは最大都市）。"
+  },
+  {
+    "id": "GE-038",
+    "category": "一般教養",
+    "subcategory": "地理",
+    "question": "世界で最も人口が多い国は、現在インドである。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "国連推計により、2023年にインドが中国を抜いて世界最多の人口国となりました。"
+  },
+  {
+    "id": "GE-039",
+    "category": "一般教養",
+    "subcategory": "地理",
+    "question": "パナマ運河は大西洋と太平洋を結ぶ運河である。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "中央アメリカのパナマ地峡を開削し、太平洋とカリブ海（大西洋）を結んでいます。"
+  },
+  {
+    "id": "GE-040",
+    "category": "一般教養",
+    "subcategory": "地理",
+    "question": "スエズ運河は、地中海と紅海を結んでいる。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "エジプトにある運河で、地中海と紅海（ひいてはインド洋）を直結しています。"
+  },
+  {
+    "id": "GE-041",
+    "category": "一般教養",
+    "subcategory": "地理",
+    "question": "南米大陸を流れるアマゾン川の河口は、太平洋に面している。",
+    "answer": "No",
+    "answer_bool": false,
+    "explanation": "アマゾン川は西のアンデス山脈から東へと流れ、「大西洋」に注ぎます。"
+  },
+  {
+    "id": "GE-042",
+    "category": "一般教養",
+    "subcategory": "地理",
+    "question": "世界で最も面積の広い内陸国（海に面していない国）はカザフスタンである。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "カザフスタンは約272万㎢で世界最大の内陸国です。"
+  },
+  {
+    "id": "GE-043",
+    "category": "一般教養",
+    "subcategory": "地理",
+    "question": "アフリカ大陸の北部に広がる世界最大の砂漠は「サハラ砂漠」である。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "サハラ砂漠はアフリカ北部の大部分を占める世界最大の砂漠です。"
+  },
+  {
+    "id": "GE-044",
+    "category": "一般教養",
+    "subcategory": "地理",
+    "question": "ブラジルの公用語は「スペイン語」である。",
+    "answer": "No",
+    "answer_bool": false,
+    "explanation": "南米諸国の多くはスペイン語ですが、かつてポルトガル領だったブラジルの公用語は「ポルトガル語」です。"
+  },
+  {
+    "id": "GE-045",
+    "category": "一般教養",
+    "subcategory": "地理",
+    "question": "「白夜（びゃくや）」とは、夏に太陽が沈まないか、沈んでも薄明かりが続く現象のことである。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "高緯度地域（北極圏・南極圏など）で見られる、夜になっても暗くならない現象です。"
+  },
+  {
+    "id": "GE-046",
+    "category": "一般教養",
+    "subcategory": "地理",
+    "question": "アメリカ合衆国の首都ワシントンD.C.は、ワシントン州の中にある。",
+    "answer": "No",
+    "answer_bool": false,
+    "explanation": "首都ワシントンD.C.は東海岸（メリーランド州とバージニア州の間）の特別区であり、西海岸にあるワシントン州とは全く別の場所です。"
+  },
+  {
+    "id": "GE-047",
+    "category": "一般教養",
+    "subcategory": "地理",
+    "question": "東南アジア諸国連合（ASEAN）の本部は、タイのバンコクにある。",
+    "answer": "No",
+    "answer_bool": false,
+    "explanation": "ASEANの事務局本部はインドネシアの「ジャカルタ」にあります。"
+  },
+  {
+    "id": "GE-048",
+    "category": "一般教養",
+    "subcategory": "地理",
+    "question": "世界遺産「マチュ・ピチュ」遺跡がある国はペルーである。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "ペルーのアンデス山脈の尾根に位置するインカ帝国の遺跡です。"
+  },
+  {
+    "id": "GE-049",
+    "category": "一般教養",
+    "subcategory": "地理",
+    "question": "イギリス（グレートブリテン及び北アイルランド連合王国）は、イングランド、スコットランド、ウェールズ、北アイルランドの4つの地域から成る。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "4つのカントリー（国・地域）によって構成される連合王国です。"
+  },
+  {
+    "id": "GE-050",
+    "category": "一般教養",
+    "subcategory": "地理",
+    "question": "カナダの公用語は英語のみである。",
+    "answer": "No",
+    "answer_bool": false,
+    "explanation": "カナダの連邦公用語は「英語」と「フランス語」の2つです（特にケベック州でフランス語が話されます）。"
+  },
+  {
+    "id": "GE-051",
+    "category": "一般教養",
+    "subcategory": "地理",
+    "question": "国際日付変更線は、東経（西経）180度の子午線にほぼ沿って設定されている。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "本初子午線（経度0度）のちょうど地球の反対側にあたる180度経線付近に設けられています。"
+  },
+  {
+    "id": "GE-052",
+    "category": "一般教養",
+    "subcategory": "地理",
+    "question": "世界で一番標高の高い山「エベレスト（チョモランマ）」は、チリとアルゼンチンの国境にある。",
+    "answer": "No",
+    "answer_bool": false,
+    "explanation": "エベレストはアジアのヒマラヤ山脈（ネパールと中国チベット自治区の国境）にあります。"
+  },
+  {
+    "id": "GE-053",
+    "category": "一般教養",
+    "subcategory": "歴史",
+    "question": "第一次世界大戦の引き金となった「サラエボ事件」が起きた都市サラエボは、現在のボスニア・ヘルツェゴビナにある。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "1914年、オーストリア皇太子夫妻が暗殺されたサラエボはボスニア・ヘルツェゴビナの首都です。"
+  },
+  {
+    "id": "GE-054",
+    "category": "一般教養",
+    "subcategory": "歴史",
+    "question": "1929年に起きた世界恐慌の発端となった株価大暴落は、ロンドンの株式市場で始まった。",
+    "answer": "No",
+    "answer_bool": false,
+    "explanation": "アメリカ・ニューヨークのウォール街（ニューヨーク証券取引所）で始まりました（暗黒の木曜日）。"
+  },
+  {
+    "id": "GE-055",
+    "category": "一般教養",
+    "subcategory": "歴史",
+    "question": "冷戦の象徴であった「ベルリンの壁」が崩壊したのは、西暦1989年のことである。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "1989年11月9日にベルリンの壁が開放され、翌1990年に東西ドイツが統一されました。"
+  },
+  {
+    "id": "GE-056",
+    "category": "一般教養",
+    "subcategory": "歴史",
+    "question": "フランス革命で発表された「人権宣言（人間と市民の権利の宣言）」が採択された年は1789年である。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "バスティーユ牢獄襲撃と同じ1789年にラ・ファイエットらが起草し採択されました。"
+  },
+  {
+    "id": "GE-057",
+    "category": "一般教養",
+    "subcategory": "歴史",
+    "question": "アメリカ合衆国の初代大統領はエイブラハム・リンカーンである。",
+    "answer": "No",
+    "answer_bool": false,
+    "explanation": "初代大統領はジョージ・ワシントンです（リンカーンは第16代）。"
+  },
+  {
+    "id": "GE-058",
+    "category": "一般教養",
+    "subcategory": "歴史",
+    "question": "ソビエト連邦が正式に解体・崩壊したのは西暦1991年である。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "1991年12月、ゴルバチョフ大統領の辞任に伴いソビエト連邦邦は消滅しました。"
+  },
+  {
+    "id": "GE-059",
+    "category": "一般教養",
+    "subcategory": "歴史",
+    "question": "第二次世界大戦終結後、日本を占領・統治したGHQの最高司令官はアイゼンハワーである。",
+    "answer": "No",
+    "answer_bool": false,
+    "explanation": "GHQ（連合国軍最高司令官総司令部）の最高司令官はダグラス・マッカーサーです。"
+  },
+  {
+    "id": "GE-060",
+    "category": "一般教養",
+    "subcategory": "歴史",
+    "question": "19世紀半ば、イギリスと清（中国）の間で起きたアヘン戦争に勝利したのは清である。",
+    "answer": "No",
+    "answer_bool": false,
+    "explanation": "イギリスが勝利し、南京条約によって香港割譲や開港を清に認めさせました。"
+  },
+  {
+    "id": "GE-061",
+    "category": "一般教養",
+    "subcategory": "歴史",
+    "question": "明治政府が発布した「五箇条の御誓文」の第一条は「広く会議を興し、万機公論に決すべし」である。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "1868年、明治天皇が神々に誓う形式で出された明治新政府の基本方針です。"
+  },
+  {
+    "id": "GE-062",
+    "category": "一般教養",
+    "subcategory": "歴史",
+    "question": "サンフランシスコ平和条約が調印された1951年、同時に日米安全保障条約も調印された。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "1951年9月8日、日本の主権回復と同時に旧日米安全保障条約が締結されました。"
+  },
+  {
+    "id": "GE-063",
+    "category": "一般教養",
+    "subcategory": "歴史",
+    "question": "ヨーロッパの「産業革命」は、18世紀後半のドイツで綿工業から始まった。",
+    "answer": "No",
+    "answer_bool": false,
+    "explanation": "産業革命が最初に始まったのは「イギリス」です（蒸気機関の実用化と紡績技術革新）。"
+  },
+  {
+    "id": "GE-064",
+    "category": "一般教養",
+    "subcategory": "歴史",
+    "question": "日本が国際連合（国連）に加盟したのは、第二次世界大戦直後の1945年である。",
+    "answer": "No",
+    "answer_bool": false,
+    "explanation": "敗戦後の日本は設立当初入れず、ソ連との国交回復（日ソ共同宣言）を経た「1956年」に加盟しました。"
+  },
+  {
+    "id": "GE-065",
+    "category": "一般教養",
+    "subcategory": "歴史",
+    "question": "アポロ11号が人類初の月面着陸に成功した際、月面に降り立った宇宙飛行士はニール・アームストロングである。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "1969年7月20日、アームストロング船長が「これは一人の人間にとっては小さな一歩だが、人類にとっては偉大な飛躍である」の名言を残しました。"
+  },
+  {
+    "id": "GE-066",
+    "category": "一般教養",
+    "subcategory": "歴史",
+    "question": "オスマン帝国が滅亡し、現在のトルコ共和国を建国した初代大統領はアタテュルク（ケマル・パシャ）である。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "近代化と政教分離を断行し「トルコの父（アタテュルク）」と呼ばれました。"
+  },
+  {
+    "id": "GE-067",
+    "category": "一般教養",
+    "subcategory": "歴史",
+    "question": "キューバ危機（1962年）において、アメリカ大統領としてソ連と対峙したのはケネディ大統領である。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "ジョン・F・ケネディ大統領とソ連のフルシチョフ首相の間で核戦争勃発寸前の緊張が走りました。"
+  },
+  {
+    "id": "GE-068",
+    "category": "一般教養",
+    "subcategory": "歴史",
+    "question": "日露戦争（1904〜1905年）の講和条約が結ばれた場所はアメリカの「ポーツマス」である。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "アメリカ大統領セオドア・ルーズベルトの仲介によりポーツマス講和条約が締結されました。"
+  },
+  {
+    "id": "GE-069",
+    "category": "一般教養",
+    "subcategory": "IT",
+    "question": "WebサイトのURLの先頭が「https」の「s」は、「Security（安全）」を意味するSSL/TLS暗号化通信を表している。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "通信経路が暗号化され、第三者による盗聴や改ざんを防ぐ仕組みです。"
+  },
+  {
+    "id": "GE-070",
+    "category": "一般教養",
+    "subcategory": "IT",
+    "question": "二段階認証（2FA）を設定すれば、パスワードが漏洩しても不正ログインを防止できる確率が大幅に高まる。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "パスワード（知識情報）に加え、スマホへのワンタイムコード（所持情報）などを組み合わせるため強固になります。"
+  },
+  {
+    "id": "GE-071",
+    "category": "一般教養",
+    "subcategory": "IT",
+    "question": "「フィッシング詐欺」とは、実在する銀行や通販サイトを装った偽メール等で偽サイトに誘導し、IDやパスワードを盗む手口である。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "魚釣りのfishingではなく、洗練された詐欺を意味するphishingと呼ばれます。"
+  },
+  {
+    "id": "GE-072",
+    "category": "一般教養",
+    "subcategory": "IT",
+    "question": "オープンソースソフトウェア（OSS）は、ソースコードが無償公開されているが、いかなる改変も法的に禁止されている。",
+    "answer": "No",
+    "answer_bool": false,
+    "explanation": "OSSはソースコードの利用だけでなく、ライセンス条項に従う限り「自由に改変・再配布」することが認められています。"
+  },
+  {
+    "id": "GE-073",
+    "category": "一般教養",
+    "subcategory": "IT",
+    "question": "IPアドレスにおける「127.0.0.1」は、自分自身の端末（ローカルホスト）を指す特別なIPアドレスである。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "ループバックアドレスと呼ばれ、自分自身のマシン内部のネットワーク通信テスト等に使われます。"
+  },
+  {
+    "id": "GE-074",
+    "category": "一般教養",
+    "subcategory": "IT",
+    "question": "DNS（Domain Name System）は、「google.com」のようなドメイン名をIPアドレスに変換する役割を持つ。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "人間が覚えやすいドメイン名と、機械が通信に使うIPアドレスを紐付ける名前解決の仕組みです。"
+  },
+  {
+    "id": "GE-075",
+    "category": "一般教養",
+    "subcategory": "IT",
+    "question": "「ランサムウェア」とは、PCの画面を広告で埋め尽くして作業を邪魔するだけの無害なソフトウェアである。",
+    "answer": "No",
+    "answer_bool": false,
+    "explanation": "端末内のファイルを勝手に暗号化して使えなくし、元に戻す身代金（Ransom）を要求する極めて凶悪なマルウェアです。"
+  },
+  {
+    "id": "GE-076",
+    "category": "一般教養",
+    "subcategory": "IT",
+    "question": "クラウドサービスにおける「SaaS」の読み方は「サース」であり、ソフトウェアをインターネット経由で利用する形態を指す。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "Software as a Serviceの略で、GmailやGoogle Docs、Slackなどが代表例です。"
+  },
+  {
+    "id": "GE-077",
+    "category": "一般教養",
+    "subcategory": "IT",
+    "question": "ビット（bit）はコンピュータの最小単位であり、8ビット集まると「1バイト（Byte）」になる。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "8 bit = 1 Byte です。"
+  },
+  {
+    "id": "GE-078",
+    "category": "一般教養",
+    "subcategory": "IT",
+    "question": "PCの「SSD」は、内部で磁気ディスクをモーターで高速回転させてデータを読み書きしている。",
+    "answer": "No",
+    "answer_bool": false,
+    "explanation": "磁気ディスクを回転させるのは「HDD（ハードディスク）」です。SSDは半導体メモリ（フラッシュメモリ）を使います。"
+  },
+  {
+    "id": "GE-079",
+    "category": "一般教養",
+    "subcategory": "IT",
+    "question": "生成AIにおける「ハルシネーション（Hallucination）」とは、AIが事実に基づかないもっともらしい嘘を出力する現象を指す。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "人工知能が学習データにない事象を事実であるかのように幻覚（もっともらしい虚偽）として生成する現象です。"
+  },
+  {
+    "id": "GE-080",
+    "category": "一般教養",
+    "subcategory": "IT",
+    "question": "「Wi-Fi」の暗号化規格において、「WEP」は最新かつ最も安全性の高い暗号化方式である。",
+    "answer": "No",
+    "answer_bool": false,
+    "explanation": "WEPは初期の規格で瞬時に解読可能であり極めて脆弱です。現在はWPA2やWPA3が標準です。"
+  },
+  {
+    "id": "GE-081",
+    "category": "一般教養",
+    "subcategory": "IT",
+    "question": "「Cookie（クッキー）」とは、Webブラウザにユーザーのログイン状態やアクセス履歴などを一時保存する仕組みである。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "Webサイトが訪問者を識別・利便性を高めるために端末に保存させる小さなデータです。"
+  },
+  {
+    "id": "GE-082",
+    "category": "一般教養",
+    "subcategory": "IT",
+    "question": "CPU（中央演算処理装置）の処理速度を表す単位「Hz（ヘルツ）」の数値が大きいほど、一般に1秒間に処理できる回数が多い。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "クロック周波数のことで、数値が高いほど高速にクロック信号を刻み計算処理を行えます。"
+  },
+  {
+    "id": "GE-083",
+    "category": "一般教養",
+    "subcategory": "IT",
+    "question": "「VPN（Virtual Private Network）」とは、公衆回線上に仮想的な専用トンネルを作り、通信を暗号化して安全に行う技術である。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "テレワークやリモートアクセスにおいて外部から安全に社内網・自宅網に接続するための基本技術です。"
+  },
+  {
+    "id": "GE-084",
+    "category": "一般教養",
+    "subcategory": "IT",
+    "question": "Bluetooth通信は、最大100km離れた場所にある機器同士を直接無線接続できる。",
+    "answer": "No",
+    "answer_bool": false,
+    "explanation": "Bluetoothは近距離無線通信規格であり、到達距離は通常数メートル〜数十メートル程度です。"
+  },
+  {
+    "id": "GE-085",
+    "category": "一般教養",
+    "subcategory": "IT",
+    "question": "「ブロックチェーン」技術は、取引記録を暗号技術で分散して鎖状につなぎ、データの改ざんを極めて困難にする仕組みである。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "ビットコインなどの暗号資産や分散台帳技術の中核となっている基本構造です。"
+  },
+  {
+    "id": "GE-086",
+    "category": "一般教養",
+    "subcategory": "IT",
+    "question": "「ゼロデイ脆弱性」とは、ソフトウェアの欠陥が修正パッチ提供前に公になり、防御策が講じられる前に攻撃される危険な状態を指す。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "修正プログラムが提供された日（Day 0）以前に攻撃が成立してしまう脆弱性のことです。"
+  },
+  {
+    "id": "GE-087",
+    "category": "一般教養",
+    "subcategory": "IT",
+    "question": "「API（Application Programming Interface）」とは、異なるソフトウェアやシステム同士がデータや機能を連携するための窓口である。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "Webサービス同士を自動連携させたり外部プログラムから機能を利用するためのインターフェースです。"
+  },
+  {
+    "id": "GE-088",
+    "category": "一般教養",
+    "subcategory": "IT",
+    "question": "コンピュータのメモリ（RAM）に保存されているデータは、電源を切っても半永久的に消えずに残る。",
+    "answer": "No",
+    "answer_bool": false,
+    "explanation": "RAM（主記憶装置）は「揮発性メモリ」のため、電源を切るとデータは消去されます（不揮発なのはストレージ）。"
+  },
+  {
+    "id": "GE-089",
+    "category": "一般教養",
+    "subcategory": "政治",
+    "question": "世界保健機関（WHO）の本部は、スイスのジュネーブにある。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "国際連合の専門機関であるWHOの本部はジュネーブにあります。"
+  },
+  {
+    "id": "GE-090",
+    "category": "一般教養",
+    "subcategory": "政治",
+    "question": "日本の国会議員が国会の会期中に逮捕されない特権を「不逮捕特権」という。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "憲法第50条で定められた、会期中の院の許諾なしには逮捕されない特権です。"
+  },
+  {
+    "id": "GE-091",
+    "category": "一般教養",
+    "subcategory": "政治",
+    "question": "日本の裁判において、民事裁判と刑事裁判は必ず同じ判事が担当しなければならない。",
+    "answer": "No",
+    "answer_bool": false,
+    "explanation": "裁判所内でも民事部と刑事部に分かれており、事件ごとに担当裁判官が割り当てられます。"
+  },
+  {
+    "id": "GE-092",
+    "category": "一般教養",
+    "subcategory": "経済",
+    "question": "OECD（経済協力開発機構）は、別名「先進国クラブ」とも呼ばれる国際機関である。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "市場経済と自由民主主義を重んじる主要先進38カ国が加盟する政策協議機関です。"
+  },
+  {
+    "id": "GE-093",
+    "category": "一般教養",
+    "subcategory": "経済",
+    "question": "「ユニコーン企業」とは、設立10年以内で企業価値が10億ドル以上の未上場ベンチャー企業を指す言葉である。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "極めて希少であることから架空の生物ユニコーンに例えられた経済用語です。"
+  },
+  {
+    "id": "GE-094",
+    "category": "一般教養",
+    "subcategory": "経済",
+    "question": "日本で発行されている硬貨（500円玉〜1円玉）のうち、磁石にくっつく硬貨は1枚もない。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "日本の通常硬貨はニッケル黄銅、白銅、青銅、黄銅、アルミニウム等でできており、磁石にはつきません。"
+  },
+  {
+    "id": "GE-095",
+    "category": "一般教養",
+    "subcategory": "地理",
+    "question": "アフリカ大陸の最高峰は「キリマンジャロ」である。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "タンザニアにある標高5,895mの独立峰で、アフリカ大陸の最高峰です。"
+  },
+  {
+    "id": "GE-096",
+    "category": "一般教養",
+    "subcategory": "地理",
+    "question": "北極点には陸地（大陸）が存在する。",
+    "answer": "No",
+    "answer_bool": false,
+    "explanation": "北極点は氷に覆われた北極海（海）です。陸地（大陸）があるのは南極（南極大陸）です。"
+  },
+  {
+    "id": "GE-097",
+    "category": "一般教養",
+    "subcategory": "歴史",
+    "question": "中国で最初の統一王朝を築き、「始皇帝」と名乗ったのは秦の王である。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "紀元前221年に中国全土を初めて統一した秦の嬴政（始皇帝）です。"
+  },
+  {
+    "id": "GE-098",
+    "category": "一般教養",
+    "subcategory": "歴史",
+    "question": "宗教改革を始めたマルティン・ルターが「九十五箇条の論題」を発表した国はドイツである。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "1517年、神聖ローマ帝国（現在のドイツ）のヴィッテンベルクで免罪符販売を批判しました。"
+  },
+  {
+    "id": "GE-099",
+    "category": "一般教養",
+    "subcategory": "IT",
+    "question": "「DoS攻撃（サービス不能攻撃）」とは、大量のアクセスを送りつけて標的のサーバをパンクさせるサイバー攻撃である。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "Denial of Serviceの略で、サービスを過負荷にして停止に追い込む攻撃手法です。"
+  },
+  {
+    "id": "GE-100",
+    "category": "一般教養",
+    "subcategory": "IT",
+    "question": "「GitHub」などのGitリポジトリ管理サービスにおいて、「コミット（commit）」とは変更履歴を記録・確定させる操作を指す。",
+    "answer": "Yes",
+    "answer_bool": true,
+    "explanation": "ローカルリポジトリにステージングした変更点をひとまとまりの記録として保存する操作です。"
+  }
+]

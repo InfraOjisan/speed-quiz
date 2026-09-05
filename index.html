@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#0b0c10">
+  <meta name="description" content="ショー型・超高速1分間タイムアタック学習ゲーム『SpeedQuiz』。タイパ至上主義で脳汁を出して学ぶ！">
+  <link rel="manifest" href="manifest.json">
+  <title>SpeedQuiz | 1分間タイムアタック学習</title>
+  
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- Fullscreen Canvas Layers -->
+  <canvas id="crack-canvas"></canvas>
+  <canvas id="particle-canvas"></canvas>
+
+  <div class="app-container">
+
+    <!-- ====================================================================
+         Screen 1: Home (ホーム・モード選択・スマート設定)
+         ==================================================================== -->
+    <section id="screen-home" class="app-screen active">
+      <header class="home-header">
+        <div class="app-title-wrap">
+          <h1 class="app-title">SpeedQuiz</h1>
+          <div class="app-subtitle">⚡ 1-MIN HIGH SPEED STUDY ⚡</div>
+        </div>
+      </header>
+
+      <!-- Player Status Card -->
+      <div class="glass-panel user-status-card">
+        <div class="status-row">
+          <div class="status-user-info">
+            <span class="user-name" id="home-player-name">チャレンジャー</span>
+            <span class="user-title-badge" id="home-player-title">《疾風のルーキー》</span>
+          </div>
+          <div class="status-stats">
+            <div class="stat-box">
+              <div class="stat-label">Best</div>
+              <div class="stat-num" id="home-high-score">0</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-label">Trophy</div>
+              <div class="stat-num" id="home-trophy-count">0/20</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mode Selection -->
+      <div class="section-heading">🎮 出題難易度（モード）</div>
+      <div class="mode-grid">
+        <div class="mode-card selected" data-mode="all">
+          <div class="mode-icon">⚡</div>
+          <div class="mode-name">全問ミックス</div>
+          <div class="mode-desc">基礎〜一般常識まで完全ランダム</div>
+        </div>
+        <div class="mode-card" data-mode="junior">
+          <div class="mode-icon">🚀</div>
+          <div class="mode-name">小・中学の復習</div>
+          <div class="mode-desc">スピード重視！反射神経で解く基礎</div>
+        </div>
+        <div class="mode-card" data-mode="general">
+          <div class="mode-icon">🌐</div>
+          <div class="mode-name">一般教養</div>
+          <div class="mode-desc">雑学・時事・マナー・大人常識</div>
+        </div>
+        <div class="mode-card" data-mode="hard">
+          <div class="mode-icon">🔥</div>
+          <div class="mode-name">難問特化</div>
+          <div class="mode-desc">灘・開成・名門校の厳選良問</div>
+        </div>
+      </div>
+
+      <!-- Smart Filter & Subject Selection -->
+      <div class="section-heading">🎯 スマート科目設定</div>
+      <div class="smart-presets-wrap">
+        <button type="button" class="smart-preset-btn" data-preset="all">全選択</button>
+        <button type="button" class="smart-preset-btn" data-preset="bunkei">文系</button>
+        <button type="button" class="smart-preset-btn" data-preset="rikei">理系</button>
+        <button type="button" class="smart-preset-btn" data-preset="kokuritsu">国公立</button>
+        <button type="button" class="smart-preset-btn" data-preset="business">時事・IT</button>
+      </div>
+
+      <div class="subjects-checkbox-grid">
+        <label class="subject-label"><input type="checkbox" class="subject-checkbox" value="算数・数学" checked><span>算数・数学</span></label>
+        <label class="subject-label"><input type="checkbox" class="subject-checkbox" value="理科" checked><span>理科</span></label>
+        <label class="subject-label"><input type="checkbox" class="subject-checkbox" value="社会" checked><span>社会</span></label>
+        <label class="subject-label"><input type="checkbox" class="subject-checkbox" value="国語" checked><span>国語</span></label>
+        <label class="subject-label"><input type="checkbox" class="subject-checkbox" value="英語" checked><span>英語</span></label>
+        <label class="subject-label"><input type="checkbox" class="subject-checkbox" value="政治" checked><span>政治</span></label>
+        <label class="subject-label"><input type="checkbox" class="subject-checkbox" value="経済" checked><span>経済</span></label>
+        <label class="subject-label"><input type="checkbox" class="subject-checkbox" value="地理" checked><span>地理</span></label>
+        <label class="subject-label"><input type="checkbox" class="subject-checkbox" value="歴史" checked><span>歴史</span></label>
+        <label class="subject-label"><input type="checkbox" class="subject-checkbox" value="IT" checked><span>IT・情報</span></label>
+      </div>
+
+      <!-- Big CTA Start Button -->
+      <button id="home-start-btn" class="cta-start-btn">
+        <span>⚡ 1分間タイムアタック開始！</span>
+      </button>
+    </section>
+
+    <!-- ====================================================================
+         Screen 2: Game Play (ゲームプレイ・超高速テンポ)
+         ==================================================================== -->
+    <section id="screen-game" class="app-screen">
+      <!-- Top Info Bar -->
+      <div class="game-top-bar">
+        <div class="time-bar-wrapper">
+          <div id="game-time-bar" class="time-bar-fill"></div>
+        </div>
+        <div class="game-status-line">
+          <div class="timer-display">
+            <span id="game-time-text" class="timer-num">60.0</span>
+            <span class="timer-unit">SEC</span>
+          </div>
+          <div class="score-display">
+            <span id="game-score-val" class="score-val">0</span>
+            <div id="game-floating-container"></div>
+          </div>
+        </div>
+
+        <!-- Badges line (Combo & Fever) -->
+        <div class="game-badges-line">
+          <div id="game-combo-badge" class="combo-badge hidden">3 COMBO!</div>
+          <div id="game-fever-badge" class="fever-badge hidden">🔥 FEVER x2.0 🔥</div>
+        </div>
+      </div>
+
+      <!-- Warning Cut-in Overlay -->
+      <div id="game-warning-overlay" class="warning-cutin-overlay hidden">
+        ⚠️ WARNING!! 緊急難問カットイン!! ⚠️
+      </div>
+
+      <!-- Central Question Card -->
+      <div id="game-card-container" class="question-card-container">
+        <div id="game-q-category" class="q-category-tag">小中復習 > 算数・数学</div>
+        <div id="game-q-source" class="q-source-tag hidden">出題: 灘中 改題</div>
+        <div id="game-q-text" class="q-text">問題文がここに表示されます。</div>
+
+        <!-- Penalty Freeze Overlay -->
+        <div id="game-freeze-overlay" class="freeze-penalty-overlay hidden">
+          <div class="freeze-title">CRASHED!!</div>
+          <div class="freeze-timer">操作不能: <span id="freeze-seconds">2.0</span>s</div>
+        </div>
+      </div>
+
+      <!-- Bottom Answer Buttons (2択大型タップ＆スワイプ対応) -->
+      <div id="game-answer-buttons" class="answer-buttons-wrap">
+        <button id="btn-answer-no" class="ans-btn ans-btn-no" type="button" aria-label="いいえ・バツ">
+          <span>❌ NO</span>
+          <span class="ans-sublabel">◀ スワイプ左</span>
+        </button>
+        <button id="btn-answer-yes" class="ans-btn ans-btn-yes" type="button" aria-label="はい・マル">
+          <span>⭕ YES</span>
+          <span class="ans-sublabel">スワイプ右 ▶</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         Screen 3: Result (4ブロック仕様書完全準拠)
+         ==================================================================== -->
+    <section id="screen-result" class="app-screen">
+      <header class="result-header">
+        <h2 class="result-title">TIME UP! リザルト</h2>
+      </header>
+
+      <!-- Block 1: スコア＆アチーブメント -->
+      <div class="result-block">
+        <div class="glass-panel score-summary-card">
+          <div class="rank-display-wrap">
+            <div id="result-rank-badge" class="rank-badge">S</div>
+            <div id="result-score-val" class="score-huge">0</div>
+          </div>
+          <div class="score-stats-grid">
+            <div class="r-stat-box">
+              <div class="r-stat-label">解答数</div>
+              <div class="r-stat-val" id="result-stat-answered">0</div>
+            </div>
+            <div class="r-stat-box">
+              <div class="r-stat-label">正解数</div>
+              <div class="r-stat-val" id="result-stat-correct">0</div>
+            </div>
+            <div class="r-stat-box">
+              <div class="r-stat-label">正解率</div>
+              <div class="r-stat-val" id="result-stat-accuracy">0%</div>
+            </div>
+            <div class="r-stat-box">
+              <div class="r-stat-label">平均速度</div>
+              <div class="r-stat-val" id="result-stat-speed">0.0s</div>
+            </div>
+            <div class="r-stat-box">
+              <div class="r-stat-label">最大コンボ</div>
+              <div class="r-stat-val" id="result-stat-combo">0</div>
+            </div>
+          </div>
+
+          <!-- Unlocked Achievements in this run -->
+          <div id="result-achievements-container" class="hidden"></div>
+        </div>
+      </div>
+
+      <!-- Block 2: AIパーソナリティ＆タイプ診断 -->
+      <div class="result-block">
+        <div class="section-heading">🧠 AIパーソナリティ診断</div>
+        <div class="glass-panel diagnosis-panel">
+          <div id="diagnosis-loading" class="hidden" style="text-align:center; padding:20px;">
+            <div>AIがプレイログを鋭く分析中... ⚡</div>
+          </div>
+          <div id="diagnosis-content">
+            <div class="diag-header-wrap">
+              <div id="diag-tag" class="diag-tag">神速の絶対覇王タイプ</div>
+              <div id="diag-mbti" class="diag-mbti-pill">ENTJ-A</div>
+            </div>
+
+            <!-- Avatar Badge Canvas -->
+            <div class="diag-avatar-wrap">
+              <canvas id="diag-avatar-canvas" width="220" height="220"></canvas>
+            </div>
+
+            <div class="diag-meta-grid">
+              <div class="diag-meta-box">
+                <div class="diag-meta-lbl">歴史上の人物なら</div>
+                <div id="diag-historical" class="diag-meta-val">織田信長</div>
+              </div>
+              <div class="diag-meta-box">
+                <div class="diag-meta-lbl">芸能人なら</div>
+                <div id="diag-celebrity" class="diag-meta-val">カズレーザー</div>
+              </div>
+            </div>
+
+            <div id="diag-evaluation" class="diag-eval-text">
+              刺さる性格評がここに表示されます。
+            </div>
+
+            <div class="diag-actions">
+              <button id="result-share-btn" class="diag-btn" type="button">📢 結果をシェア</button>
+              <button id="result-save-avatar-btn" class="diag-btn" type="button">💾 アバター保存</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Block 3: 30秒リベンジデッキ（復習機能） -->
+      <div id="result-block-revenge" class="result-block">
+        <div class="section-heading">⚡ 30秒リベンジデッキ（弱点克服）</div>
+        <div class="glass-panel">
+          <p style="font-size:0.8rem; color:var(--text-secondary); margin-bottom:10px;">
+            今回ミスした問題です。ワンタップで30秒リベンジマッチを開始し、弱点を完全克服しよう！
+          </p>
+          <div id="result-missed-list"></div>
+          <button id="result-revenge-btn" class="cta-revenge-btn" type="button">
+            ⚡ このミス問だけで30秒リベンジ！
+          </button>
+        </div>
+      </div>
+
+      <!-- Block 4: 深掘りショートリンク -->
+      <div class="result-block">
+        <div class="section-heading">🔗 深掘りショートリンク</div>
+        <div class="glass-panel">
+          <div id="result-deep-links"></div>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="result-actions-grid">
+        <button id="result-retry-btn" class="result-action-btn btn-primary-action" type="button">もう一度挑戦</button>
+        <button id="result-home-btn" class="result-action-btn btn-secondary-action" type="button">ホームへ戻る</button>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         Screen 4: Revenge Deck (弱点ノート)
+         ==================================================================== -->
+    <section id="screen-revenge" class="app-screen">
+      <header class="home-header">
+        <h2 class="result-title">📖 弱点ノート</h2>
+        <div class="app-subtitle">未克服の弱点: <span id="revenge-count-total">0</span>問</div>
+      </header>
+
+      <div class="glass-panel" style="margin-bottom:16px;">
+        <p style="font-size:0.85rem; color:var(--text-secondary); line-height:1.4;">
+          間違えた問題がここに自動ストックされます。「30秒リベンジマッチ」で正解すると克服完了！
+        </p>
+        <button id="revenge-start-match-btn" class="cta-revenge-btn" style="margin-top:12px;" type="button">
+          ⚡ 未克服問題の30秒リベンジマッチ！
+        </button>
+      </div>
+
+      <div id="revenge-screen-list"></div>
+    </section>
+
+    <!-- ====================================================================
+         Screen 5: Dashboard (称号・進捗・アチーブメント)
+         ==================================================================== -->
+    <section id="screen-dashboard" class="app-screen">
+      <header class="home-header">
+        <h2 class="result-title">🏆 ダッシュボード</h2>
+        <div class="app-subtitle">PLAYER STATUS & PROGRESS</div>
+      </header>
+
+      <!-- Profile Card -->
+      <div class="glass-panel" style="margin-bottom:16px;">
+        <div class="profile-edit-box">
+          <label class="settings-label">プレイヤー名</label>
+          <div style="display:flex; gap:8px;">
+            <input type="text" id="profile-name-input" class="input-text" style="flex:1;" maxlength="16" value="チャレンジャー">
+            <button id="profile-save-name-btn" class="smart-preset-btn" style="padding:10px 14px;" type="button">更新</button>
+          </div>
+
+          <label class="settings-label" style="margin-top:8px;">装備中の称号</label>
+          <select id="profile-title-select" class="input-select"></select>
+        </div>
+      </div>
+
+      <!-- Total Stats -->
+      <div class="dash-stats-grid">
+        <div class="dash-stat-card">
+          <div class="stat-label">総得点</div>
+          <div id="dash-total-score" class="dash-stat-val">0</div>
+        </div>
+        <div class="dash-stat-card">
+          <div class="stat-label">ハイスコア</div>
+          <div id="dash-high-score" class="dash-stat-val">0</div>
+        </div>
+        <div class="dash-stat-card">
+          <div class="stat-label">総正解数</div>
+          <div id="dash-total-correct" class="dash-stat-val">0</div>
+        </div>
+        <div class="dash-stat-card">
+          <div class="stat-label">総プレイ回数</div>
+          <div id="dash-total-plays" class="dash-stat-val">0</div>
+        </div>
+        <div class="dash-stat-card" style="grid-column: span 2;">
+          <div class="stat-label">総合正解率</div>
+          <div id="dash-overall-acc" class="dash-stat-val">0%</div>
+        </div>
+      </div>
+
+      <!-- Category Progress -->
+      <div class="section-heading">📊 出題分類マスター進捗</div>
+      <div class="glass-panel" style="margin-bottom:20px;">
+        <div id="dash-category-progress"></div>
+      </div>
+
+      <!-- Achievements -->
+      <div class="section-heading">🎖️ アチーブメント・称号一覧</div>
+      <div id="dash-achievements-list"></div>
+    </section>
+
+    <!-- ====================================================================
+         Screen 6: Settings (管理メニュー・保護者設定)
+         ==================================================================== -->
+    <section id="screen-settings" class="app-screen">
+      <header class="home-header">
+        <h2 class="result-title">⚙️ 管理メニュー</h2>
+        <div class="app-subtitle">お父さん・お母さんに設定してもらってね</div>
+      </header>
+
+      <div class="glass-panel" style="margin-bottom:16px;">
+        <div class="section-heading">🤖 生成AI API連携</div>
+        <p style="font-size:0.75rem; color:var(--text-muted); margin-bottom:12px;">
+          Google Gemini等のAPIキーを入力すると、プレイログに基づいた最新AI診断・動的プロンプトが利用可能になります。（未入力でもビルトインAI診断が動作します）
+        </p>
+        
+        <div class="settings-group">
+          <label class="settings-label" for="settings-ai-endpoint">APIエンドポイント</label>
+          <input type="text" id="settings-ai-endpoint" class="input-text" style="width:100%;" value="https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent">
+        </div>
+
+        <div class="settings-group">
+          <label class="settings-label" for="settings-ai-key">APIキー (ローカル保存のみ)</label>
+          <input type="password" id="settings-ai-key" class="input-text" style="width:100%;" placeholder="AIzaSy...">
+        </div>
+      </div>
+
+      <div class="glass-panel" style="margin-bottom:16px;">
+        <div class="section-heading">🔊 サウンド＆エフェクト</div>
+        <div class="toggle-row">
+          <span>効果音 (SE)</span>
+          <label class="switch-toggle">
+            <input type="checkbox" id="settings-sound-toggle" checked>
+            <span class="slider-round"></span>
+          </label>
+        </div>
+        <div class="toggle-row">
+          <span>プレイ中BGM</span>
+          <label class="switch-toggle">
+            <input type="checkbox" id="settings-bgm-toggle" checked>
+            <span class="slider-round"></span>
+          </label>
+        </div>
+        <button id="settings-save-btn" class="smart-preset-btn" style="width:100%; margin-top:10px; padding:12px;" type="button">
+          設定を保存する
+        </button>
+      </div>
+
+      <div class="glass-panel" style="margin-bottom:16px;">
+        <div class="section-heading">📥 成績データ出力</div>
+        <p style="font-size:0.75rem; color:var(--text-muted); margin-bottom:10px;">
+          学習履歴やアチーブメント、弱点データをファイルに出力して保存できます。
+        </p>
+        <div style="display:flex; gap:8px;">
+          <button id="settings-dl-csv" class="diag-btn" type="button">CSVダウンロード</button>
+          <button id="settings-dl-json" class="diag-btn" type="button">JSONダウンロード</button>
+        </div>
+      </div>
+
+      <div class="glass-panel">
+        <div class="section-heading" style="color:var(--accent-red);">⚠️ データリセット</div>
+        <p style="font-size:0.75rem; color:var(--text-muted);">
+          これまでのすべてのスコア、アチーブメント、弱点ノートを初期化します。
+        </p>
+        <button id="settings-reset-btn" class="danger-btn" type="button">ローカルデータを全削除</button>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ====================================================================
+       Fixed Bottom Navigation
+       ==================================================================== -->
+  <nav class="bottom-nav">
+    <button class="nav-btn active" data-screen="home" type="button">
+      <span class="nav-icon">🏠</span>
+      <span>ホーム</span>
+    </button>
+    <button class="nav-btn" data-screen="revenge" type="button">
+      <span class="nav-icon">📖</span>
+      <span>復習</span>
+      <span class="nav-badge revenge-badge hidden">0</span>
+    </button>
+    <button class="nav-btn" data-screen="dashboard" type="button">
+      <span class="nav-icon">🏆</span>
+      <span>ステータス</span>
+    </button>
+    <button class="nav-btn" data-screen="settings" type="button">
+      <span class="nav-icon">⚙️</span>
+      <span>管理</span>
+    </button>
+  </nav>
+
+  <!-- PWA Service Worker Registration & Module Script -->
+  <script type="module" src="js/app.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').catch(err => {
+          console.log('ServiceWorker registration skipped:', err);
+        });
+      });
+    }
+  </script>
+</body>
+</html>
