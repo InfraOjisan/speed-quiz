@@ -59,6 +59,7 @@ class StorageManager {
         soundEnabled: true,
         bgmEnabled: true,
         vibrationEnabled: true,
+        aiModel: 'gemini-1.5-flash',
         aiApiEndpoint: 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent',
         aiApiKey: ''
       }

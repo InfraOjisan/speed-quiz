@@ -12,7 +12,7 @@ class DiagnosisEngine {
     // 外部LLM APIキーが設定されている場合は本物のLLMを呼び出し
     if (settings && settings.aiApiKey && settings.aiApiKey.trim().length > 5) {
       try {
-        const llmResult = await this.callGeminiAPI(telemetry, settings.aiApiKey, settings.aiApiEndpoint);
+        const llmResult = await this.callLLMAPI(telemetry, settings);
         if (llmResult) return llmResult;
       } catch (err) {
         console.warn('LLM API call failed, falling back to heuristic engine:', err);
@@ -101,8 +101,12 @@ class DiagnosisEngine {
     };
   }
 
-  // Google Gemini API 連携呼び出し
-  async callGeminiAPI(telemetry, apiKey, endpoint) {
+  // LLM API 連携呼び出し (Gemini / OpenAI形式両対応)
+  async callLLMAPI(telemetry, settings) {
+    const apiKey = settings.aiApiKey;
+    let endpoint = settings.aiApiEndpoint || 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent';
+    const model = settings.aiModel || 'gemini-1.5-flash';
+
     const prompt = `あなたは超高速学習Webアプリ『SpeedQuiz』の専属AI診断士です。
 プレイヤーのプレイログ（テレメトリデータ）を元に、ユーザーの性格と学習スタイルを鋭く分析し、ユーモアと知的興奮のある診断結果を日本語JSON形式で返してください。
 
@@ -127,34 +131,66 @@ class DiagnosisEngine {
   "imagePrompt": "アバター生成用英語プロンプト"
 }`;
 
-    const url = endpoint.includes('?') ? `${endpoint}&key=${apiKey}` : `${endpoint}?key=${apiKey}`;
+    const isOpenAI = endpoint.includes('/chat/completions') || endpoint.includes('api.openai.com');
+    let rawText = '';
 
-    const body = {
-      contents: [{
-        parts: [{ text: prompt }]
-      }],
-      generationConfig: {
-        temperature: 0.7,
-        maxOutputTokens: 800
+    if (isOpenAI) {
+      // OpenAI / 互換API (Bearer token)
+      const body = {
+        model: model,
+        messages: [
+          { role: 'system', content: 'You are a helpful AI that only outputs pure JSON.' },
+          { role: 'user', content: prompt }
+        ],
+        temperature: 0.7
+      };
+
+      const res = await fetch(endpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${apiKey}`
+        },
+        body: JSON.stringify(body)
+      });
+
+      if (!res.ok) throw new Error(`OpenAI API error: ${res.status} ${res.statusText}`);
+      const data = await res.json();
+      rawText = data.choices?.[0]?.message?.content || '';
+    } else {
+      // Google Gemini API
+      // URLに指定モデルを反映
+      if (model && !endpoint.includes(model) && endpoint.includes('googleapis.com')) {
+        endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`;
       }
-    };
 
-    const res = await fetch(url, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body)
-    });
+      const url = endpoint.includes('?') ? `${endpoint}&key=${apiKey}` : `${endpoint}?key=${apiKey}`;
 
-    if (!res.ok) {
-      throw new Error(`Gemini API error: ${res.status} ${res.statusText}`);
+      const body = {
+        contents: [{
+          parts: [{ text: prompt }]
+        }],
+        generationConfig: {
+          temperature: 0.7,
+          maxOutputTokens: 800
+        }
+      };
+
+      const res = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+      });
+
+      if (!res.ok) throw new Error(`Gemini API error: ${res.status} ${res.statusText}`);
+      const data = await res.json();
+      rawText = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
     }
 
-    const data = await res.json();
-    const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
-    if (!text) throw new Error('Empty response from Gemini');
+    if (!rawText) throw new Error('Empty response from LLM API');
 
     // JSONパース（バッククォート等の除去）
-    const cleanText = text.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim();
+    const cleanText = rawText.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim();
     const parsed = JSON.parse(cleanText);
 
     return {

@@ -354,18 +354,43 @@ class SpeedQuizApp {
       });
     }
 
+    // AIモデル選択セレクトボックスの連動
+    const modelSelect = document.getElementById('settings-ai-model-select');
+    const modelInput = document.getElementById('settings-ai-model');
+    const endpointInput = document.getElementById('settings-ai-endpoint');
+    if (modelSelect) {
+      modelSelect.addEventListener('change', () => {
+        const val = modelSelect.value;
+        if (val === 'gemini-1.5-flash') {
+          if (modelInput) modelInput.value = 'gemini-1.5-flash';
+          if (endpointInput) endpointInput.value = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent';
+        } else if (val === 'gemini-2.0-flash') {
+          if (modelInput) modelInput.value = 'gemini-2.0-flash';
+          if (endpointInput) endpointInput.value = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent';
+        } else if (val === 'gemini-1.5-pro') {
+          if (modelInput) modelInput.value = 'gemini-1.5-pro';
+          if (endpointInput) endpointInput.value = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent';
+        } else if (val === 'gpt-4o-mini') {
+          if (modelInput) modelInput.value = 'gpt-4o-mini';
+          if (endpointInput) endpointInput.value = 'https://api.openai.com/v1/chat/completions';
+        }
+      });
+    }
+
     // 設定画面の保存
     const saveSettingsBtn = document.getElementById('settings-save-btn');
     if (saveSettingsBtn) {
       saveSettingsBtn.addEventListener('click', () => {
         sound.playClick();
-        const endpoint = document.getElementById('settings-ai-endpoint').value.trim();
+        const model = (modelInput ? modelInput.value.trim() : '') || 'gemini-1.5-flash';
+        const endpoint = (endpointInput ? endpointInput.value.trim() : '') || 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent';
         const apiKey = document.getElementById('settings-ai-key').value.trim();
         const soundOn = document.getElementById('settings-sound-toggle').checked;
         const bgmOn = document.getElementById('settings-bgm-toggle').checked;
 
         storage.updateSettings({
-          aiApiEndpoint: endpoint || 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent',
+          aiModel: model,
+          aiApiEndpoint: endpoint,
           aiApiKey: apiKey,
           soundEnabled: soundOn,
           bgmEnabled: bgmOn
@@ -857,12 +882,24 @@ class SpeedQuizApp {
 
   updateSettingsUI() {
     const s = storage.getSettings();
+    const modelSelect = document.getElementById('settings-ai-model-select');
+    const modelInput = document.getElementById('settings-ai-model');
     const endpointInput = document.getElementById('settings-ai-endpoint');
     const keyInput = document.getElementById('settings-ai-key');
     const soundToggle = document.getElementById('settings-sound-toggle');
     const bgmToggle = document.getElementById('settings-bgm-toggle');
 
-    if (endpointInput) endpointInput.value = s.aiApiEndpoint || '';
+    const currentModel = s.aiModel || 'gemini-1.5-flash';
+    if (modelInput) modelInput.value = currentModel;
+    if (modelSelect) {
+      if (['gemini-1.5-flash', 'gemini-2.0-flash', 'gemini-1.5-pro', 'gpt-4o-mini'].includes(currentModel)) {
+        modelSelect.value = currentModel;
+      } else {
+        modelSelect.value = 'custom';
+      }
+    }
+
+    if (endpointInput) endpointInput.value = s.aiApiEndpoint || 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent';
     if (keyInput) keyInput.value = s.aiApiKey || '';
     if (soundToggle) soundToggle.checked = s.soundEnabled !== false;
     if (bgmToggle) bgmToggle.checked = s.bgmEnabled !== false;
