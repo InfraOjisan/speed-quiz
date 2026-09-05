@@ -706,6 +706,72 @@ body {
 .diagnosis-panel {
   border-color: rgba(123, 44, 191, 0.5);
   background: linear-gradient(145deg, rgba(123, 44, 191, 0.15), rgba(15, 20, 28, 0.85));
+  position: relative;
+  overflow: hidden;
+}
+
+/* AI Cyber Terminal Loading (その場で生成している臨場感演出) */
+.ai-generating-terminal {
+  text-align: center;
+  padding: 24px 14px;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px dashed rgba(0, 245, 212, 0.4);
+  border-radius: 14px;
+}
+
+.terminal-brain-pulse {
+  font-size: 2.5rem;
+  display: inline-block;
+  animation: brain-glow 1s infinite alternate ease-in-out;
+}
+
+@keyframes brain-glow {
+  0% { transform: scale(0.92); filter: drop-shadow(0 0 6px rgba(0, 245, 212, 0.4)); }
+  100% { transform: scale(1.1); filter: drop-shadow(0 0 20px rgba(0, 245, 212, 0.9)); }
+}
+
+.terminal-title {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--accent-cyan);
+  margin-top: 8px;
+  letter-spacing: 0.5px;
+}
+
+.terminal-progress-bar {
+  width: 100%;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+  margin: 14px 0 10px 0;
+}
+
+.terminal-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #00f5d4, #7b2cbf, #f72585);
+  transition: width 0.3s ease-out;
+}
+
+.terminal-status-text {
+  font-size: 0.8rem;
+  font-family: var(--font-mono);
+  color: var(--accent-yellow);
+  min-height: 20px;
+  letter-spacing: 0.3px;
+}
+
+.typing-cursor::after {
+  content: '▋';
+  color: var(--accent-cyan);
+  animation: blink 0.7s infinite;
+  margin-left: 2px;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }
 
 .diag-header-wrap {

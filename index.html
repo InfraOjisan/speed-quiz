@@ -216,10 +216,17 @@
       <div class="result-block">
         <div class="section-heading">🧠 AIパーソナリティ診断</div>
         <div class="glass-panel diagnosis-panel">
-          <div id="diagnosis-loading" class="hidden" style="text-align:center; padding:20px;">
-            <div>AIがプレイログを鋭く分析中... ⚡</div>
+          <!-- Cyber AI Generating Terminal (最初から結果は見せない演出) -->
+          <div id="diagnosis-loading" class="ai-generating-terminal">
+            <div class="terminal-brain-pulse">🧠</div>
+            <div class="terminal-title">AIニューラル診断エンジン思考中...</div>
+            <div class="terminal-progress-bar">
+              <div id="terminal-progress-fill" class="terminal-progress-fill"></div>
+            </div>
+            <div id="terminal-status-msg" class="terminal-status-text">▶ プレイログ（テレメトリデータ）を受信中...</div>
           </div>
-          <div id="diagnosis-content">
+
+          <div id="diagnosis-content" class="hidden">
             <div class="diag-header-wrap">
               <div id="diag-tag" class="diag-tag">神速の絶対覇王タイプ</div>
               <div id="diag-mbti" class="diag-mbti-pill">ENTJ-A</div>

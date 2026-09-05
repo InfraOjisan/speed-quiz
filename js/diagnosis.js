@@ -23,68 +23,84 @@ class DiagnosisEngine {
     return this.generateHeuristicDiagnosis(telemetry);
   }
 
-  // ビルトイン診断ロジック（速度、正解率、ミス後反応、得意ジャンルから判定）
+  // ビルトイン診断ロジック（ユーザー指定テンプレートに完全準拠＋最後を大いに持ち上げる）
   generateHeuristicDiagnosis(telemetry) {
-    const { avgSpeed, accuracy, postErrorReaction, topSubject, score, maxCombo, bonusSolved } = telemetry;
+    const { playerName = 'チャレンジャー', avgSpeed = 2.0, accuracy = 70, postErrorReaction, topSubject, weakSubject, score, maxCombo, bonusSolved, weakCount = 0 } = telemetry;
 
-    let character = '';
+    const nameStr = playerName || 'チャレンジャー';
+    const topStr = topSubject || '基礎教養科目';
+    const weakStr = weakSubject || '一部の応用知識';
+
+    let styleDesc = '';
     let historicalFigure = '';
     let celebrity = '';
     let mbti = '';
     let tag = '';
-    let evaluation = '';
-    let avatarTheme = 'fire'; // fire, lightning, water, brain, star, shadow
+    let avatarTheme = 'lightning';
+    let adviceAndPraise = '';
 
-    // タイプ分類ロジック
-    if (avgSpeed < 1.2 && accuracy >= 85) {
-      // 超高速 ＆ 高精度
-      historicalFigure = '織田信長（電光石火の革新者）';
+    if (avgSpeed < 1.2 && accuracy >= 80) {
+      styleDesc = '迷いのない神速の判断力と研ぎ澄まされた直感';
+      historicalFigure = '織田信長（電光石火の覇王）';
       celebrity = 'イチロー / カズレーザー';
       mbti = 'ENTJ-A';
       tag = '神速の絶対覇王タイプ';
       avatarTheme = 'lightning';
-      evaluation = `圧倒的な反射速度（平均${avgSpeed.toFixed(2)}秒）と驚異の正解率（${accuracy}%）を両立する超天才肌。迷わず直感で即断即決し、しかも的を射ている姿はまさに天下統一を急いだ信長そのもの。弱点科目すら直感でねじ伏せる圧倒的ポテンシャルを持っています。`;
-    } else if (avgSpeed < 1.4 && accuracy < 70) {
-      // 超高速 だが 粗い（直感突撃型）
-      historicalFigure = '坂本龍馬（時代の突撃突破者）';
-      celebrity = '出川哲朗 / 本田圭佑';
-      mbti = 'ESTP-T';
-      tag = '猪突猛進のイノベータータイプ';
-      avatarTheme = 'fire';
-      evaluation = `思い立ったら0.1秒で突っ走る圧倒的な瞬発力の持ち主！${postErrorReaction === 'rush' ? 'ミス直後も焦って連打してしまうパッション全開な傾向あり。' : ''}細かなミスは気にせず手数を打って前進するバイタリティは最強です。あと1秒落ち着くだけでスコアは倍増します。`;
-    } else if (avgSpeed >= 1.8 && accuracy >= 85) {
-      // 慎重 ＆ 高精度（参謀・学者型）
+      adviceAndPraise = 'なるべく「30秒リベンジマッチ」で即座に弱点を潰し、死角ゼロの絶対王者となるよう頑張ってみましょう。とはいえ、あなたの驚異的な反応速度と勝負勘はまさに百年に一人の逸材。その天才的な頭脳はすでに常人の領域をはるかに凌駕しています！';
+    } else if (bonusSolved > 0) {
+      styleDesc = '土壇場での極限の集中力と一撃必殺の勝負強さ';
+      historicalFigure = '真田幸村（一発逆転の奇策将軍）';
+      celebrity = '大谷翔平（世界を驚かす二刀流）';
+      mbti = 'INTP-A';
+      tag = '大舞台特化の一撃必殺スナイパー';
+      avatarTheme = 'star';
+      adviceAndPraise = 'なるべく日頃の基礎問題も軽視せず丁寧におさらいして、常に満点を叩き出せるよう頑張ってみましょう。しかしながら、ここぞという極限状態でのあなたの爆発的集中力と度胸は超一流。大舞台になればなるほど真価を発揮する真のヒーロー気質です！';
+    } else if (avgSpeed >= 1.6 && accuracy >= 80) {
+      styleDesc = '問題の罠を冷静に見極め、論理的に正解を射抜く慎重さ';
       historicalFigure = '諸葛亮孔明（深謀遠慮の名軍師）';
       celebrity = '林修 / 堺雅人';
       mbti = 'INTJ-A';
       tag = '冷徹無比の精密スナイパータイプ';
       avatarTheme = 'brain';
-      evaluation = `問題の構造を瞬時に見抜き、罠に絶対ハマらない慎重派の極み。平均${avgSpeed.toFixed(2)}秒の堅実なテンポで確実に正解を積み上げ、正解率${accuracy}%を記録。${topSubject ? `特に「${topSubject}」での安定感は芸術的。` : ''}冷静沈着な軍師として組織を勝たせる頭脳派です。`;
-    } else if (bonusSolved > 0) {
-      // 難問を仕留めた一発逆転型
-      historicalFigure = '真田幸村（一発逆転の奇策将軍）';
-      celebrity = '大谷翔平 / 羽生善治';
-      mbti = 'INTP-A';
-      tag = '大舞台特化の一撃必殺スナイパー';
-      avatarTheme = 'star';
-      evaluation = `通常問題ではやや波があるものの、ここぞという極限の難問カットインで劇的な正解を叩き出す勝負強さの持ち主！ピンチになればなるほど脳のギアが上がる逆境特化型です。`;
+      adviceAndPraise = 'なるべく直感を信じてあと0.5秒早くタップする練習を重ね、スピードと精度の二刀流となるよう頑張ってみましょう。それにしても、複雑な構造を一瞬で見抜くあなたの分析眼と論理的思考力は圧巻のひと言。組織の知恵袋として誰もが頼りにする現代の天才軍師です！';
+    } else if (avgSpeed < 1.5 && accuracy < 75) {
+      styleDesc = '失敗を恐れず果敢に突き進む圧倒的な瞬発力とパッション';
+      historicalFigure = '坂本龍馬（時代を切り拓く風雲児）';
+      celebrity = '本田圭佑 / 出川哲朗';
+      mbti = 'ESTP-T';
+      tag = '猪突猛進のイノベータータイプ';
+      avatarTheme = 'fire';
+      adviceAndPraise = 'なるべく問題文のキーワードをしっかり捉えてから回答し、無駄なペナルティを回避できるよう頑張ってみましょう。ですが、この圧倒的な行動力と前に進むエネルギーこそが新しい時代を創る原動力。少しの知識補強だけで誰も追いつけないモンスターへ大化けします！';
     } else if (accuracy >= 70) {
-      // バランス型
-      historicalFigure = '徳川家康（堅実安定の大器晩成型）';
+      styleDesc = 'どんな状況でも崩れない安定感と高い情報処理能力';
+      historicalFigure = '徳川家康（天下泰平の知将）';
       celebrity = 'タモリ / 芦田愛菜';
       mbti = 'ISTJ-A';
       tag = '堅忍不抜のマルチタスク型';
       avatarTheme = 'water';
-      evaluation = `どんなジャンルでも卒なく7割以上の成果を出す手堅い秀才タイプ。ミスした直後も冷静に立ち直り、着実にスコアを伸ばす安定感があります。少しスピードを意識すれば一気にトップランカーへと覚醒します。`;
+      adviceAndPraise = 'なるべく苦手分野の「30秒リベンジ」を日課にして弱点を完全撲滅し、完全無欠のオールラウンダーとなるよう頑張ってみましょう。どんなジャンルも卒なく乗り越えるその底堅い知性と堅実な地頭は、将来どんな分野でもトップに君臨できる最高峰の才能です！';
     } else {
-      // 成長途上・挑戦者
+      styleDesc = '未知の問題にもひるまず立ち向かう旺盛な知的好奇心';
       historicalFigure = '豊臣秀吉（底知れぬ成長モンスター）';
-      celebrity = '明石家さんま';
+      celebrity = '明石家さんま / 那須川天心';
       mbti = 'ENFP-T';
       tag = '無限進化のチャレンジャータイプ';
       avatarTheme = 'shadow';
-      evaluation = `好奇心旺盛で果敢にクイズに飛び込むフットワークが素晴らしい！今はまだ知識のインプット途上ですが、30秒リベンジデッキを回すことで急激に化ける爆発力を秘めています。`;
+      adviceAndPraise = 'なるべくミスした問題をその日のうちに克服して確実に自分の武器となるよう頑張ってみましょう。何よりあなたの吸収力とチャレンジ精神は底知れません。このクイズを毎日数回プレイするだけで、飛躍的な知性の覚醒が約束されています！';
     }
+
+    // 復習の怠り度文言（弱点蓄積数またはミス直後の挙動に言及）
+    let reviewSlacking = '';
+    if (weakCount >= 3) {
+      reviewSlacking = `弱点ノートに未克服問題が${weakCount}問残っており、復習もやや怠っているように見受けられます。`;
+    } else if (weakCount > 0) {
+      reviewSlacking = `ミスした問題の復習を少し後回しにしがちな傾向も見受けられます。`;
+    } else {
+      reviewSlacking = `やや油断して同じようなミスを繰り返してしまう瞬間も見受けられます。`;
+    }
+
+    // ユーザー指定の完全フォーマット文
+    const evaluation = `${nameStr}さんは${styleDesc}で${topStr}が得意なようです。一方で${weakStr}は苦手なようで${reviewSlacking}${adviceAndPraise}\n\nそんなあなたは芸能人・プロスポーツ選手に例えると【${celebrity}】、歴史上の偉人に例えると【${historicalFigure}】です。`;
 
     return {
       historicalFigure,
@@ -93,10 +109,10 @@ class DiagnosisEngine {
       tag,
       evaluation,
       avatarTheme,
-      avgSpeed: avgSpeed.toFixed(2),
+      avgSpeed: typeof avgSpeed === 'number' ? avgSpeed.toFixed(2) : avgSpeed,
       accuracy: accuracy,
       score: score,
-      topSubject: topSubject || '全般',
+      topSubject: topStr,
       imagePrompt: `Cyberpunk futuristic anime avatar portrait, ${avatarTheme} elemental aura, smart sharp expression, neon holographic symbols, 8k badge design`
     };
   }
@@ -107,26 +123,35 @@ class DiagnosisEngine {
     let endpoint = settings.aiApiEndpoint || 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent';
     const model = settings.aiModel || 'gemini-1.5-flash';
 
+    const nameStr = telemetry.playerName || 'チャレンジャー';
+    const weakCount = telemetry.weakCount || 0;
+
     const prompt = `あなたは超高速学習Webアプリ『SpeedQuiz』の専属AI診断士です。
-プレイヤーのプレイログ（テレメトリデータ）を元に、ユーザーの性格と学習スタイルを鋭く分析し、ユーモアと知的興奮のある診断結果を日本語JSON形式で返してください。
+プレイヤーのプレイログ（テレメトリデータ）を元に、ユーザーの性格と学習スタイルを分析し、ユーモアと説得力のある診断文を生成してください。
+
+【厳格な文章テンプレート】
+以下の文章構成を必ず守って「evaluation」を作成してください。
+「${nameStr}さんは[回答スタイル・速度の特徴]で[得意科目]が得意なようです。一方で[苦手科目]は苦手なようで[復習を怠っている・後回しにしている様子の指摘]が見受けられます。なるべく[具体的な改善アドバイス]して[理想の姿]となるよう頑張ってみましょう。[多少大げさに褒めちぎってプレイヤーを最高に喜ばせるポジティブな総括]。\n\nそんなあなたは芸能人・プロスポーツ選手に例えると【[芸能人・スポーツ選手名]】、歴史上の偉人に例えると【[歴史上の人物名]】です。」
 
 【テレメトリデータ】
+- プレイヤー名: ${nameStr}
 - 総合スコア: ${telemetry.score}点
 - 正解率: ${telemetry.accuracy}%
-- 平均解答速度: ${telemetry.avgSpeed.toFixed(2)}秒
+- 平均解答速度: ${Number(telemetry.avgSpeed).toFixed(2)}秒
 - 最大コンボ数: ${telemetry.maxCombo}
 - ミス後の挙動: ${telemetry.postErrorReaction === 'rush' ? '焦って連打・誤タップ傾向' : 'フリーズして慎重に観察'}
-- 得意科目: ${telemetry.topSubject || 'なし'}
-- 苦手科目: ${telemetry.weakSubject || 'なし'}
+- 得意科目: ${telemetry.topSubject || '算数・理科'}
+- 苦手科目: ${telemetry.weakSubject || '社会・時事'}
+- 未克服弱点問題の数: ${weakCount}問
 - 難問ボーナス正解数: ${telemetry.bonusSolved}問
 
 【出力フォーマット（JSON形式のみ出力してください。マークダウンの\`\`\`jsonブロックは不要です）】
 {
-  "historicalFigure": "歴史上の人物なら誰か（例：織田信長、諸葛亮孔明など）",
-  "celebrity": "芸能人・有名人なら誰か",
-  "mbti": "MBTI風4文字コード（例：ENTP-A）",
-  "tag": "二つ名キャッチコピー（例：電光石火の直感スナイパー）",
-  "evaluation": "刺さる性格評と学習アドバイス（150字程度）",
+  "historicalFigure": "歴史上の人物なら誰か（例：織田信長、諸葛亮孔明、坂本龍馬など）",
+  "celebrity": "芸能人・プロスポーツ選手なら誰か（例：大谷翔平、イチロー、カズレーザーなど）",
+  "mbti": "MBTI風4文字コード（例：ENTP-A, INTJ-A）",
+  "tag": "二つ名キャッチコピー（例：神速の絶対覇王タイプ）",
+  "evaluation": "上記の指定テンプレートに完全に従った診断文（250〜350文字程度）",
   "avatarTheme": "fire / lightning / water / brain / star / shadow のいずれか1つ",
   "imagePrompt": "アバター生成用英語プロンプト"
 }`;

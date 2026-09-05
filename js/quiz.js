@@ -403,7 +403,12 @@ export class QuizGame {
       }
     });
 
+    const player = storage.getPlayer();
+    const pendingWeaknesses = storage.getPendingWeaknesses();
+
     const telemetry = {
+      playerName: player ? player.name : 'チャレンジャー',
+      weakCount: pendingWeaknesses ? pendingWeaknesses.length : 0,
       score: this.score,
       totalAnswered: totalAns,
       totalCorrect: this.sessionStats.totalCorrect,

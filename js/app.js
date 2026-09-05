@@ -622,27 +622,81 @@ class SpeedQuizApp {
     const settings = storage.getSettings();
     const loadingEl = document.getElementById('diagnosis-loading');
     const contentEl = document.getElementById('diagnosis-content');
+    const progressFill = document.getElementById('terminal-progress-fill');
+    const statusMsg = document.getElementById('terminal-status-msg');
 
     if (loadingEl) loadingEl.classList.remove('hidden');
     if (contentEl) contentEl.classList.add('hidden');
 
-    const diagnosis = await diagnosisEngine.generateDiagnosis(telemetry, settings);
-    storage.saveDiagnosis(diagnosis);
+    // サイバー・ターミナル解析演出 (ステップ進行で臨場感を演出)
+    if (progressFill) progressFill.style.width = '20%';
+    if (statusMsg) statusMsg.textContent = '▶ 思考速度・判断傾向をスキャン中...';
 
+    // AI診断を非同期で開始
+    const diagPromise = diagnosisEngine.generateDiagnosis(telemetry, settings);
+
+    // ステップ演出 (ユーザーに「今AIが考えている」雰囲気をしっかり見せる)
+    await new Promise(r => setTimeout(r, 450));
+    if (progressFill) progressFill.style.width = '55%';
+    if (statusMsg) statusMsg.textContent = '▶ 弱点パターン・学習傾向をプロファイリング中...';
+
+    await new Promise(r => setTimeout(r, 500));
+    if (progressFill) progressFill.style.width = '85%';
+    if (statusMsg) statusMsg.textContent = '▶ 歴史上の偉人・著名人DBとニューラル照合中...';
+
+    // 診断完了を待機
+    const diagnosis = await diagPromise;
+    storage.saveDiagnosis(diagnosis);
+    this.currentDiagnosis = diagnosis; // シェア用に保持
+
+    await new Promise(r => setTimeout(r, 400));
+    if (progressFill) progressFill.style.width = '100%';
+    if (statusMsg) statusMsg.textContent = '✓ AI頭脳タイプ診断＆アバター生成完了！';
+
+    await new Promise(r => setTimeout(r, 350));
+
+    // 結果表示へ切り替え
     if (loadingEl) loadingEl.classList.add('hidden');
-    if (contentEl) contentEl.classList.remove('hidden');
+    if (contentEl) {
+      contentEl.classList.remove('hidden');
+      contentEl.classList.add('pulse');
+    }
 
     document.getElementById('diag-tag').textContent = diagnosis.tag;
     document.getElementById('diag-historical').textContent = diagnosis.historicalFigure;
     document.getElementById('diag-celebrity').textContent = diagnosis.celebrity;
     document.getElementById('diag-mbti').textContent = diagnosis.mbti;
-    document.getElementById('diag-evaluation').textContent = diagnosis.evaluation;
 
     // アバター描画
     const canvas = document.getElementById('diag-avatar-canvas');
     if (canvas) {
       diagnosisEngine.drawAvatarBadge(canvas, diagnosis);
     }
+
+    // 診断文のタイピング演出（1文字ずつカタカタ出力してリアルタイム生成感を演出！）
+    const evalEl = document.getElementById('diag-evaluation');
+    if (evalEl) {
+      this.typewriterEffect(evalEl, diagnosis.evaluation, 16);
+    }
+  }
+
+  // タイピングアニメーション演出
+  typewriterEffect(element, fullText, speedMs = 16) {
+    element.textContent = '';
+    element.classList.add('typing-cursor');
+    let idx = 0;
+    if (this.typingTimer) clearInterval(this.typingTimer);
+
+    this.typingTimer = setInterval(() => {
+      if (idx < fullText.length) {
+        element.textContent += fullText[idx];
+        idx++;
+      } else {
+        clearInterval(this.typingTimer);
+        this.typingTimer = null;
+        element.classList.remove('typing-cursor');
+      }
+    }, speedMs);
   }
 
   renderResultBlock3() {
@@ -715,23 +769,72 @@ class SpeedQuizApp {
     });
   }
 
-  shareResult() {
+  async shareResult() {
     if (!this.lastSessionResult) return;
     const score = this.lastSessionResult.score;
     const acc = this.lastSessionResult.telemetry.accuracy;
-    const shareText = `【SpeedQuiz】60秒タイムアタックで${score.toLocaleString()}点を獲得！（正解率: ${acc}%） #SpeedQuiz #神速学習`;
+    const player = storage.getPlayer();
+    const playerName = player ? player.name : 'チャレンジャー';
+    const diag = this.currentDiagnosis || {};
+
+    const shareTitle = `【SpeedQuiz】${playerName}さんのAI頭脳タイプ診断結果`;
+    
+    // 診断結果を前面に押し出したリッチシェアテキスト
+    let shareText = `【SpeedQuiz AI頭脳タイプ診断結果】⚡\n`;
+    shareText += `👤 ${playerName}さん\n`;
+    if (diag.tag && diag.mbti) {
+      shareText += `🧠 タイプ: ${diag.tag} (${diag.mbti})\n`;
+    }
+    if (diag.celebrity) {
+      shareText += `🌟 芸能人・プロ選手なら: ${diag.celebrity}\n`;
+    }
+    if (diag.historicalFigure) {
+      shareText += `🏛 歴史上の偉人なら: ${diag.historicalFigure}\n`;
+    }
+    shareText += `🎯 スコア: ${score.toLocaleString()}点 (正解率: ${acc}%)\n`;
+    shareText += `#SpeedQuiz #神速学習\n\nあなたも脳汁1分間タイムアタックで診断！👇\n`;
+
     const shareUrl = window.location.href;
 
-    if (navigator.share) {
-      navigator.share({
-        title: 'SpeedQuiz リザルト',
-        text: shareText,
-        url: shareUrl
-      }).catch(() => {});
-    } else {
-      const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`;
-      window.open(twitterUrl, '_blank');
+    // アバター画像をBlob化して画像付きシェアを試みる
+    const canvas = document.getElementById('diag-avatar-canvas');
+    let imageFile = null;
+    if (canvas && canvas.toBlob) {
+      try {
+        const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
+        if (blob) {
+          imageFile = new File([blob], 'speedquiz-avatar.png', { type: 'image/png' });
+        }
+      } catch (e) {
+        console.warn('Canvas blob error:', e);
+      }
     }
+
+    if (navigator.share) {
+      try {
+        const shareData = {
+          title: shareTitle,
+          text: shareText,
+          url: shareUrl
+        };
+        if (imageFile && navigator.canShare && navigator.canShare({ files: [imageFile] })) {
+          shareData.files = [imageFile];
+        }
+        await navigator.share(shareData);
+        return;
+      } catch (err) {
+        if (err.name !== 'AbortError') {
+          console.warn('Navigator.share error:', err);
+        } else {
+          return;
+        }
+      }
+    }
+
+    // X（Twitter）共有リンク
+    const tweetText = `${shareText}${shareUrl}`;
+    const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetText)}`;
+    window.open(twitterUrl, '_blank');
   }
 
   downloadAvatar() {
