@@ -24,7 +24,10 @@
          Screen 1: Home (ホーム・モード選択・スマート設定)
          ==================================================================== -->
     <section id="screen-home" class="app-screen active">
-      <header class="home-header">
+      <header class="home-header" style="position: relative;">
+        <button id="home-quick-settings-btn" type="button" class="smart-preset-btn" style="position: absolute; right: 0; top: 10px; font-size: 0.8rem; padding: 6px 10px;" title="管理・設定メニューを開く">
+          ⚙️ 設定
+        </button>
         <div class="app-title-wrap">
           <h1 class="app-title">SpeedQuiz</h1>
           <div class="app-subtitle">⚡ 1-MIN HIGH SPEED STUDY ⚡</div>
@@ -32,7 +35,7 @@
       </header>
 
       <!-- Player Status Card -->
-      <div class="glass-panel user-status-card">
+      <div id="home-status-card" class="glass-panel user-status-card" style="cursor: pointer;" title="タップしてステータス・アチーブメントを見る">
         <div class="status-row">
           <div class="status-user-info">
             <span class="user-name" id="home-player-name">チャレンジャー</span>
@@ -48,6 +51,9 @@
               <div class="stat-num" id="home-trophy-count">0/20</div>
             </div>
           </div>
+        </div>
+        <div style="text-align: right; margin-top: 6px; font-size: 0.7rem; color: var(--accent-cyan); font-weight: 700;">
+          詳細ステータス・称号・アチーブメントを見る ▶
         </div>
       </div>
 
@@ -443,7 +449,7 @@
     </button>
     <button class="nav-btn" data-screen="settings" type="button">
       <span class="nav-icon">⚙️</span>
-      <span>管理</span>
+      <span>設定</span>
     </button>
   </nav>
 

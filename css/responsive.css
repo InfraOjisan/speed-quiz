@@ -67,7 +67,7 @@ button, input, select {
 
   .bottom-nav {
     width: 480px;
-    left: auto;
-    right: auto;
+    left: 50%;
+    transform: translateX(-50%);
   }
 }

@@ -155,6 +155,16 @@ class SpeedQuizApp {
       window.scrollTo(0, 0);
     }
 
+    // ゲーム中のみボトムナビを隠し、回答に専念できるようにする
+    const bottomNav = document.querySelector('.bottom-nav');
+    if (bottomNav) {
+      if (screenName === 'game') {
+        bottomNav.classList.add('hidden');
+      } else {
+        bottomNav.classList.remove('hidden');
+      }
+    }
+
     // ナビバーのアクティブ切り替え
     document.querySelectorAll('.nav-btn').forEach(btn => {
       if (btn.dataset.screen === screenName) {
@@ -180,7 +190,8 @@ class SpeedQuizApp {
   bindEvents() {
     // ナビゲーション
     document.querySelectorAll('.nav-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
         sound.playClick();
         const screen = btn.dataset.screen;
         if (screen) {
@@ -192,6 +203,24 @@ class SpeedQuizApp {
         }
       });
     });
+
+    // ホーム画面のステータスカードからステータス画面へのショートカット
+    const homeStatusCard = document.getElementById('home-status-card');
+    if (homeStatusCard) {
+      homeStatusCard.addEventListener('click', () => {
+        sound.playClick();
+        this.showScreen('dashboard');
+      });
+    }
+
+    // ホーム画面ヘッダーの設定ボタン
+    const homeSettingsBtn = document.getElementById('home-quick-settings-btn');
+    if (homeSettingsBtn) {
+      homeSettingsBtn.addEventListener('click', () => {
+        sound.playClick();
+        this.showScreen('settings');
+      });
+    }
 
     // モード選択ボタン
     document.querySelectorAll('.mode-card').forEach(card => {
@@ -851,7 +880,15 @@ class SpeedQuizApp {
 }
 
 // アプリ起動
-window.addEventListener('DOMContentLoaded', () => {
-  window.app = new SpeedQuizApp();
-  window.app.init();
-});
+function startApp() {
+  if (!window.app) {
+    window.app = new SpeedQuizApp();
+    window.app.init();
+  }
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', startApp);
+} else {
+  startApp();
+}

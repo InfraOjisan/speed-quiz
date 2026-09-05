@@ -3,7 +3,7 @@
  * Enables fast loading and offline play
  */
 
-const CACHE_NAME = 'speedquiz-cache-v1';
+const CACHE_NAME = 'speedquiz-cache-v2';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',

@@ -351,10 +351,13 @@ body {
    -------------------------------------------------------------------------- */
 #screen-game {
   padding: 10px 14px;
+}
+
+#screen-game.active {
   display: flex;
   flex-direction: column;
-  min-height: calc(100vh - var(--nav-height) - var(--safe-bottom));
-  min-height: calc(100dvh - var(--nav-height) - var(--safe-bottom));
+  min-height: calc(100vh - var(--safe-bottom));
+  min-height: calc(100dvh - var(--safe-bottom));
   justify-content: space-between;
 }
 
@@ -1129,20 +1132,27 @@ input:checked + .slider-round:before {
 .bottom-nav {
   position: fixed;
   bottom: 0;
-  left: 0;
-  right: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 480px;
   height: calc(var(--nav-height) + var(--safe-bottom));
   padding-bottom: var(--safe-bottom);
-  background: rgba(11, 12, 16, 0.92);
+  background: rgba(11, 12, 16, 0.95);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-top: 1px solid var(--border-glass);
   display: flex;
   justify-content: space-around;
   align-items: center;
-  z-index: 500;
-  max-width: 540px;
-  margin: 0 auto;
+  z-index: 1000;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.bottom-nav.hidden {
+  transform: translate(-50%, 100%);
+  opacity: 0;
+  pointer-events: none;
 }
 
 .nav-btn {
@@ -1153,11 +1163,15 @@ input:checked + .slider-round:before {
   flex-direction: column;
   align-items: center;
   gap: 4px;
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   font-weight: 700;
   cursor: pointer;
   position: relative;
-  padding: 6px 12px;
+  padding: 8px 16px;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  flex: 1;
+  max-width: 100px;
 }
 
 .nav-icon {
