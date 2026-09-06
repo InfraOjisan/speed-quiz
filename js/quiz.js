@@ -379,6 +379,60 @@ export class QuizGame {
       ? Math.round((this.sessionStats.totalCorrect / totalAns) * 100)
       : 0;
 
+    // 思考速度の標準偏差（テンポの安定性 / 緩急）
+    const times = this.sessionStats.answerTimes;
+    let speedVariance = 0;
+    if (times.length > 1) {
+      const mean = times.reduce((a, b) => a + b, 0) / times.length;
+      speedVariance = Math.sqrt(times.reduce((sq, n) => sq + Math.pow(n - mean, 2), 0) / times.length);
+    }
+
+    // 1秒未満の超速回答数
+    const fastAnswersCount = times.filter(t => t < 1.0).length;
+
+    // 知性ドメイン判定（理数IT、人文社会、語学国際、ビジネス実務、オールラウンダー）
+    let domainScores = {
+      stem: 0,        // 算数・数学・理科・情報
+      humanities: 0,  // 国語・歴史・社会・地歴
+      global: 0,      // 英語・英単語・国際
+      business: 0     // 政治・経済・ITインフラ・ビジネス常識
+    };
+    Object.keys(this.sessionStats.subjectStats).forEach(subj => {
+      const s = this.sessionStats.subjectStats[subj];
+      if (s.total > 0) {
+        const score = (s.correct / s.total) * s.total;
+        if (/算数|数学|理科|物理|化学|生物|地学|情報/.test(subj)) domainScores.stem += score;
+        if (/国語|歴史|社会|地理|地歴|公民/.test(subj)) domainScores.humanities += score;
+        if (/英語|英単語|国際/.test(subj)) domainScores.global += score;
+        if (/政治|経済|金融|インフラ|ビジネス/.test(subj)) domainScores.business += score;
+      }
+    });
+
+    let intellectualDomain = 'allRounder';
+    let maxDomainScore = 0;
+    Object.entries(domainScores).forEach(([dom, sc]) => {
+      if (sc > maxDomainScore && sc >= 2) {
+        maxDomainScore = sc;
+        intellectualDomain = dom;
+      }
+    });
+
+    // メンタル復元力（レジリエンス）判定
+    let mentalRecovery = 'steady';
+    if (this.sessionStats.hadIronWill || this.sessionStats.consecutivePostFreezeHits >= 2) {
+      mentalRecovery = 'ironWill'; // ミス直後に即座に立ち直り連続正解
+    } else if (this.sessionStats.wrongCount > 0) {
+      mentalRecovery = this.sessionStats.minAnswerTime < 0.6 ? 'rush' : 'cautious';
+    }
+
+    // クラッチ勝負強さ指数 (0〜100)
+    const clutchScore = Math.min(100, Math.round(
+      (this.bonusSolved * 40) +
+      (this.sessionStats.enteredFever ? 20 : 0) +
+      (this.maxCombo >= 10 ? 25 : (this.maxCombo >= 5 ? 15 : 0)) +
+      (mentalRecovery === 'ironWill' ? 15 : 0)
+    ));
+
     // 得意科目・苦手科目の偏差計算
     let topSubject = '';
     let weakSubject = '';
@@ -415,10 +469,16 @@ export class QuizGame {
       wrongCount: this.sessionStats.wrongCount,
       accuracy: accuracy,
       avgSpeed: avgSpeed,
+      speedVariance: Number(speedVariance.toFixed(2)),
+      fastAnswersCount: fastAnswersCount,
       maxCombo: this.maxCombo,
       bonusSolved: this.bonusSolved,
       topSubject: topSubject,
       weakSubject: weakSubject,
+      intellectualDomain: intellectualDomain,
+      domainScores: domainScores,
+      mentalRecovery: mentalRecovery,
+      clutchScore: clutchScore,
       postErrorReaction: this.sessionStats.minAnswerTime < 0.6 ? 'rush' : 'freeze'
     };
 

@@ -629,20 +629,31 @@ class SpeedQuizApp {
     if (contentEl) contentEl.classList.add('hidden');
 
     // サイバー・ターミナル解析演出 (ステップ進行で臨場感を演出)
-    if (progressFill) progressFill.style.width = '20%';
-    if (statusMsg) statusMsg.textContent = '▶ 思考速度・判断傾向をスキャン中...';
+    const spdStr = typeof telemetry.avgSpeed === 'number' ? telemetry.avgSpeed.toFixed(2) : telemetry.avgSpeed;
+    const varStr = typeof telemetry.speedVariance === 'number' ? telemetry.speedVariance.toFixed(2) : (telemetry.speedVariance || '0.35');
+    const domainLabels = {
+      stem: '理数・IT論理優位',
+      humanities: '人文・社会・教養優位',
+      global: '語学・国際教養優位',
+      business: '経済・実務・戦略優位',
+      allRounder: '全領域総合バランス'
+    };
+    const domainStr = domainLabels[telemetry.intellectualDomain] || '総合バランス';
+
+    if (progressFill) progressFill.style.width = '15%';
+    if (statusMsg) statusMsg.textContent = `▶ 思考速度(${spdStr}s)・テンポ分散(±${varStr}s)をスキャン中...`;
 
     // AI診断を非同期で開始
     const diagPromise = diagnosisEngine.generateDiagnosis(telemetry, settings);
 
     // ステップ演出 (ユーザーに「今AIが考えている」雰囲気をしっかり見せる)
     await new Promise(r => setTimeout(r, 450));
-    if (progressFill) progressFill.style.width = '55%';
-    if (statusMsg) statusMsg.textContent = '▶ 弱点パターン・学習傾向をプロファイリング中...';
+    if (progressFill) progressFill.style.width = '45%';
+    if (statusMsg) statusMsg.textContent = `▶ 知性ドメイン「${domainStr}」・レジリエンス特性をプロファイリング中...`;
 
     await new Promise(r => setTimeout(r, 500));
-    if (progressFill) progressFill.style.width = '85%';
-    if (statusMsg) statusMsg.textContent = '▶ 歴史上の偉人・著名人DBとニューラル照合中...';
+    if (progressFill) progressFill.style.width = '80%';
+    if (statusMsg) statusMsg.textContent = '▶ 歴史上の偉人・著名人・アスリートDB（全60+種族）とニューラル照合中...';
 
     // 診断完了を待機
     const diagnosis = await diagPromise;
@@ -666,6 +677,10 @@ class SpeedQuizApp {
     document.getElementById('diag-historical').textContent = diagnosis.historicalFigure;
     document.getElementById('diag-celebrity').textContent = diagnosis.celebrity;
     document.getElementById('diag-mbti').textContent = diagnosis.mbti;
+    const tempoEl = document.getElementById('diag-tempo-trait');
+    if (tempoEl) tempoEl.textContent = diagnosis.tempoTrait || '標準思考';
+    const domainEl = document.getElementById('diag-domain-trait');
+    if (domainEl) domainEl.textContent = diagnosis.domainTrait || domainStr;
 
     // アバター描画
     const canvas = document.getElementById('diag-avatar-canvas');
@@ -790,6 +805,9 @@ class SpeedQuizApp {
     }
     if (diag.historicalFigure) {
       shareText += `🏛 歴史上の偉人なら: ${diag.historicalFigure}\n`;
+    }
+    if (diag.tempoTrait || diag.domainTrait) {
+      shareText += `📊 特性: ${diag.tempoTrait || ''} / ${diag.domainTrait || ''}\n`;
     }
     shareText += `🎯 スコア: ${score.toLocaleString()}点 (正解率: ${acc}%)\n`;
     shareText += `#SpeedQuiz #神速学習\n\nあなたも脳汁1分間タイムアタックで診断！👇\n`;
