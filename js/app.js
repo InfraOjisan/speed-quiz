@@ -9,6 +9,8 @@ import { storage, ACHIEVEMENTS } from './storage.js';
 import { dataLoader } from './data-loader.js';
 import { QuizGame } from './quiz.js';
 import { diagnosisEngine } from './diagnosis.js';
+import { AIService } from './ai-service.js';
+import { PrescriptionEngine } from './prescription.js';
 
 class SpeedQuizApp {
   constructor() {
@@ -17,6 +19,7 @@ class SpeedQuizApp {
     this.selectedMode = 'all';
     this.selectedSubjects = [];
     this.lastSessionResult = null;
+    this.currentPrescription = null;
 
     // Swipe tracking
     this.touchStartX = 0;
@@ -361,18 +364,72 @@ class SpeedQuizApp {
     if (modelSelect) {
       modelSelect.addEventListener('change', () => {
         const val = modelSelect.value;
-        if (val === 'gemini-1.5-flash') {
-          if (modelInput) modelInput.value = 'gemini-1.5-flash';
-          if (endpointInput) endpointInput.value = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent';
-        } else if (val === 'gemini-2.0-flash') {
-          if (modelInput) modelInput.value = 'gemini-2.0-flash';
-          if (endpointInput) endpointInput.value = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent';
-        } else if (val === 'gemini-1.5-pro') {
-          if (modelInput) modelInput.value = 'gemini-1.5-pro';
-          if (endpointInput) endpointInput.value = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent';
+        if (val === 'openrouter') {
+          if (modelInput) modelInput.value = 'openai/gpt-4o-mini';
+          if (endpointInput) endpointInput.value = 'https://openrouter.ai/api/v1';
         } else if (val === 'gpt-4o-mini') {
           if (modelInput) modelInput.value = 'gpt-4o-mini';
           if (endpointInput) endpointInput.value = 'https://api.openai.com/v1/chat/completions';
+        } else if (val === 'gemini-2.0-flash') {
+          if (modelInput) modelInput.value = 'gemini-2.0-flash';
+          if (endpointInput) endpointInput.value = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent';
+        } else if (val === 'gemini-1.5-flash') {
+          if (modelInput) modelInput.value = 'gemini-1.5-flash';
+          if (endpointInput) endpointInput.value = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent';
+        } else if (val === 'gemini-1.5-pro') {
+          if (modelInput) modelInput.value = 'gemini-1.5-pro';
+          if (endpointInput) endpointInput.value = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent';
+        } else if (val === 'custom-openai') {
+          if (modelInput) modelInput.value = 'llama-3.3-70b-versatile';
+          if (endpointInput) endpointInput.value = 'https://api.groq.com/openai/v1';
+        }
+      });
+    }
+
+    // AI接続テストボタン
+    const testBtn = document.getElementById('settings-ai-test-btn');
+    const testResultEl = document.getElementById('settings-ai-test-result');
+    if (testBtn) {
+      testBtn.addEventListener('click', async () => {
+        sound.playClick();
+        const model = (modelInput ? modelInput.value.trim() : '') || 'gemini-1.5-flash';
+        const endpoint = (endpointInput ? endpointInput.value.trim() : '') || 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent';
+        const apiKey = document.getElementById('settings-ai-key').value.trim();
+
+        if (!apiKey) {
+          if (testResultEl) {
+            testResultEl.className = 'ai-test-result-box error';
+            testResultEl.classList.remove('hidden');
+            testResultEl.textContent = '❌ APIキーを入力してから接続テストを実行してください。';
+          }
+          return;
+        }
+
+        testBtn.disabled = true;
+        testBtn.textContent = '⏳ 接続テスト中...';
+        if (testResultEl) {
+          testResultEl.className = 'ai-test-result-box testing';
+          testResultEl.classList.remove('hidden');
+          testResultEl.textContent = 'AIサーバーへテスト信号を送信中...';
+        }
+
+        const res = await AIService.testConnection({
+          aiApiEndpoint: endpoint,
+          aiModel: model,
+          aiApiKey: apiKey
+        });
+
+        testBtn.disabled = false;
+        testBtn.textContent = '🔌 接続テスト（確認）';
+
+        if (testResultEl) {
+          if (res.success) {
+            testResultEl.className = 'ai-test-result-box success';
+            testResultEl.textContent = `✅ ${res.message}`;
+          } else {
+            testResultEl.className = 'ai-test-result-box error';
+            testResultEl.textContent = `❌ ${res.message}`;
+          }
         }
       });
     }
@@ -383,7 +440,7 @@ class SpeedQuizApp {
       saveSettingsBtn.addEventListener('click', () => {
         sound.playClick();
         const model = (modelInput ? modelInput.value.trim() : '') || 'gemini-1.5-flash';
-        const endpoint = (endpointInput ? endpointInput.value.trim() : '') || 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent';
+        let endpoint = (endpointInput ? endpointInput.value.trim() : '') || 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent';
         const apiKey = document.getElementById('settings-ai-key').value.trim();
         const soundOn = document.getElementById('settings-sound-toggle').checked;
         const bgmOn = document.getElementById('settings-bgm-toggle').checked;
@@ -428,6 +485,112 @@ class SpeedQuizApp {
       dlJsonBtn.addEventListener('click', () => {
         sound.playClick();
         this.downloadFile('speedquiz_stats.json', storage.exportDataAsJSON(), 'application/json');
+      });
+    }
+
+    // 結果画面から処方箋へのジャンプボタン
+    const resultGoRxBtn = document.getElementById('result-go-prescription-btn');
+    if (resultGoRxBtn) {
+      resultGoRxBtn.addEventListener('click', () => {
+        sound.playClick();
+        this.showScreen('revenge');
+        const rxCard = document.getElementById('revenge-prescription-card');
+        if (rxCard) rxCard.scrollIntoView({ behavior: 'smooth' });
+      });
+    }
+
+    // 処方箋発行ボタン
+    const rxGenBtn = document.getElementById('prescription-generate-btn');
+    if (rxGenBtn) {
+      rxGenBtn.addEventListener('click', async () => {
+        sound.playClick();
+        const pending = storage.getPendingWeaknesses();
+        if (pending.length === 0) {
+          alert('未克服の弱点問題がありません。クイズをプレイして弱点をストックしましょう！');
+          return;
+        }
+
+        const loadingOverlay = document.getElementById('prescription-loading');
+        if (loadingOverlay) loadingOverlay.classList.remove('hidden');
+
+        try {
+          const player = storage.getPlayer();
+          const settings = storage.getSettings();
+          const prescription = await PrescriptionEngine.generatePrescription(pending, player, settings);
+          this.currentPrescription = prescription;
+          this.displayPrescriptionModal(prescription);
+        } catch (err) {
+          console.error('Prescription generation error:', err);
+          alert('処方箋の生成中にエラーが発生しました: ' + err.message);
+        } finally {
+          if (loadingOverlay) loadingOverlay.classList.add('hidden');
+        }
+      });
+    }
+
+    // 処方箋モーダルを閉じる
+    const rxCloseBtn = document.getElementById('rx-modal-close-btn');
+    if (rxCloseBtn) {
+      rxCloseBtn.addEventListener('click', () => {
+        sound.playClick();
+        const modal = document.getElementById('prescription-modal');
+        if (modal) modal.classList.add('hidden');
+      });
+    }
+
+    // 処方箋モーダルの外側タップで閉じる
+    const rxModal = document.getElementById('prescription-modal');
+    if (rxModal) {
+      rxModal.addEventListener('click', (e) => {
+        if (e.target === rxModal) {
+          rxModal.classList.add('hidden');
+        }
+      });
+    }
+
+    // 処方箋のコピー
+    const rxCopyBtn = document.getElementById('rx-modal-copy-btn');
+    if (rxCopyBtn) {
+      rxCopyBtn.addEventListener('click', () => {
+        sound.playClick();
+        if (!this.currentPrescription) return;
+        const text = PrescriptionEngine.formatForShare(this.currentPrescription);
+        navigator.clipboard.writeText(text).then(() => {
+          alert('処方箋カルテをクリップボードにコピーしました！');
+        }).catch(() => {
+          alert('クリップボードへのコピーに失敗しました。');
+        });
+      });
+    }
+
+    // 処方箋のシェア
+    const rxShareBtn = document.getElementById('rx-modal-share-btn');
+    if (rxShareBtn) {
+      rxShareBtn.addEventListener('click', () => {
+        sound.playClick();
+        if (!this.currentPrescription) return;
+        const text = PrescriptionEngine.formatForShare(this.currentPrescription);
+        if (navigator.share) {
+          navigator.share({
+            title: 'SpeedQuiz 特効学習処方箋',
+            text: text,
+            url: window.location.href
+          }).catch(() => {});
+        } else {
+          const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(window.location.href)}`;
+          window.open(url, '_blank');
+        }
+      });
+    }
+
+    // 処方箋モーダルから直接30秒リベンジ開始
+    const rxRevengeBtn = document.getElementById('rx-modal-revenge-btn');
+    if (rxRevengeBtn) {
+      rxRevengeBtn.addEventListener('click', () => {
+        sound.playClick();
+        const modal = document.getElementById('prescription-modal');
+        if (modal) modal.classList.add('hidden');
+        this.startRevengeMatch();
       });
     }
   }
@@ -895,9 +1058,40 @@ class SpeedQuizApp {
   updateRevengeScreen() {
     const listEl = document.getElementById('revenge-screen-list');
     const countEl = document.getElementById('revenge-count-total');
+    const pendingWeaknesses = storage.getPendingWeaknesses();
     const weaknesses = storage.getAllWeaknesses();
+    const stats = storage.getStats();
 
-    if (countEl) countEl.textContent = storage.getPendingWeaknesses().length;
+    if (countEl) countEl.textContent = pendingWeaknesses.length;
+
+    // 処方箋カードのアンロック状況を判定・更新
+    const rxStatus = PrescriptionEngine.checkUnlockStatus(stats, pendingWeaknesses);
+    const cardEl = document.getElementById('revenge-prescription-card');
+    const badgeEl = document.getElementById('rx-unlock-badge');
+    const progText = document.getElementById('rx-progress-text');
+    const progPercent = document.getElementById('rx-progress-percent');
+    const progFill = document.getElementById('rx-progress-bar-fill');
+    const helpText = document.getElementById('rx-help-text');
+    const genBtn = document.getElementById('prescription-generate-btn');
+
+    if (cardEl) {
+      if (rxStatus.isUnlocked) {
+        cardEl.classList.add('unlocked');
+      } else {
+        cardEl.classList.remove('unlocked');
+      }
+    }
+    if (badgeEl) {
+      badgeEl.className = `rx-status-badge ${rxStatus.isUnlocked ? 'ready' : 'locked'}`;
+      badgeEl.textContent = rxStatus.isUnlocked ? '✨ 発行可能' : '🔒 ロック中';
+    }
+    if (progText) {
+      progText.textContent = `解放条件: 100問解答 または 20回プレイ (現在: ${rxStatus.totalQuestions}問 / ${rxStatus.totalPlays}回)`;
+    }
+    if (progPercent) progPercent.textContent = `${rxStatus.progressPercent}%`;
+    if (progFill) progFill.style.width = `${rxStatus.progressPercent}%`;
+    if (helpText) helpText.textContent = rxStatus.unlockHelp;
+    if (genBtn) genBtn.disabled = !rxStatus.isUnlocked;
 
     if (!listEl) return;
     listEl.innerHTML = '';
@@ -921,6 +1115,44 @@ class SpeedQuizApp {
       `;
       listEl.appendChild(card);
     });
+  }
+
+  // 処方箋モーダルの描画
+  displayPrescriptionModal(rx) {
+    const modal = document.getElementById('prescription-modal');
+    if (!modal) return;
+
+    document.getElementById('rx-modal-id').textContent = rx.prescriptionId || 'RX-0001';
+    document.getElementById('rx-modal-patient').textContent = rx.patientName || 'チャレンジャー';
+    const now = new Date();
+    document.getElementById('rx-modal-date').textContent = `${now.getFullYear()}/${String(now.getMonth() + 1).padStart(2, '0')}/${String(now.getDate()).padStart(2, '0')}`;
+    document.getElementById('rx-modal-doctor').textContent = rx.isAIGenerated ? 'Dr.AI (生成AI調剤室)' : 'Dr.AI (ビルトイン認知分析室)';
+
+    document.getElementById('rx-modal-syndrome').textContent = rx.syndromeName;
+    document.getElementById('rx-modal-severity').textContent = rx.severity || '中等度';
+    document.getElementById('rx-modal-category').textContent = rx.primaryWeakCategory || '一般教養';
+    document.getElementById('rx-modal-pathology').textContent = rx.pathology;
+
+    const medsEl = document.getElementById('rx-modal-meds');
+    if (medsEl) {
+      medsEl.innerHTML = '';
+      (rx.medicines || []).forEach(m => {
+        const item = document.createElement('div');
+        item.className = 'rx-med-card';
+        item.innerHTML = `
+          <div class="rx-med-name">${m.name}</div>
+          <div class="rx-med-dosage">用法・用量: ${m.dosage}</div>
+          <div class="rx-med-instruction">${m.instruction}</div>
+        `;
+        medsEl.appendChild(item);
+      });
+    }
+
+    document.getElementById('rx-modal-comment').textContent = rx.doctorComment;
+    const discEl = document.querySelector('.rx-disclaimer');
+    if (discEl && rx.disclaimer) discEl.textContent = rx.disclaimer;
+
+    modal.classList.remove('hidden');
   }
 
   updateDashboardUI() {
@@ -1013,8 +1245,12 @@ class SpeedQuizApp {
     const currentModel = s.aiModel || 'gemini-1.5-flash';
     if (modelInput) modelInput.value = currentModel;
     if (modelSelect) {
-      if (['gemini-1.5-flash', 'gemini-2.0-flash', 'gemini-1.5-pro', 'gpt-4o-mini'].includes(currentModel)) {
+      if (currentModel.includes('openrouter') || currentModel === 'openai/gpt-4o-mini') {
+        modelSelect.value = 'openrouter';
+      } else if (['gemini-1.5-flash', 'gemini-2.0-flash', 'gemini-1.5-pro', 'gpt-4o-mini'].includes(currentModel)) {
         modelSelect.value = currentModel;
+      } else if (currentModel === 'llama-3.3-70b-versatile') {
+        modelSelect.value = 'custom-openai';
       } else {
         modelSelect.value = 'custom';
       }

@@ -288,6 +288,9 @@
           <button id="result-revenge-btn" class="cta-revenge-btn" type="button">
             ⚡ このミス問だけで30秒リベンジ！
           </button>
+          <button id="result-go-prescription-btn" class="cta-secondary-rx-btn" type="button" style="margin-top:8px;">
+            💊 蓄積弱点から「あなたへの処方箋」を確認・発行
+          </button>
         </div>
       </div>
 
@@ -314,6 +317,39 @@
         <h2 class="result-title">📖 弱点ノート</h2>
         <div class="app-subtitle">未克服の弱点: <span id="revenge-count-total">0</span>問</div>
       </header>
+
+      <!-- Prescription Card (処方箋発行セクション) -->
+      <div id="revenge-prescription-card" class="glass-panel prescription-panel" style="margin-bottom:16px;">
+        <div class="prescription-header">
+          <div class="prescription-title-row">
+            <span class="prescription-icon">💊</span>
+            <div>
+              <div class="prescription-title">すぐ効く！あなたへの処方箋</div>
+              <div class="prescription-subtitle">Dr.AIが蓄積された弱点カルテから即効アドバイスを調剤</div>
+            </div>
+          </div>
+          <span id="rx-unlock-badge" class="rx-status-badge locked">🔒 ロック中</span>
+        </div>
+
+        <!-- 進捗状況 / アンロック条件 -->
+        <div id="rx-progress-wrap" class="rx-progress-wrap">
+          <div class="rx-progress-label">
+            <span id="rx-progress-text">解放条件: 100問解答 または 20回プレイ</span>
+            <span id="rx-progress-percent">0%</span>
+          </div>
+          <div class="rx-progress-bar-bg">
+            <div id="rx-progress-bar-fill" class="rx-progress-bar-fill" style="width: 0%;"></div>
+          </div>
+          <div id="rx-help-text" class="rx-help-text">
+            あと 100問解答 または あと 20回プレイ で解放されます
+          </div>
+        </div>
+
+        <!-- 処方箋発行ボタン -->
+        <button id="prescription-generate-btn" class="cta-prescription-btn" type="button" disabled>
+          💊 すぐ効く！あなたへの処方箋を発行する
+        </button>
+      </div>
 
       <div class="glass-panel" style="margin-bottom:16px;">
         <p style="font-size:0.85rem; color:var(--text-secondary); line-height:1.4;">
@@ -397,29 +433,46 @@
       <div class="glass-panel" style="margin-bottom:16px;">
         <div class="section-heading">🤖 生成AI API連携</div>
         <p style="font-size:0.75rem; color:var(--text-muted); margin-bottom:12px;">
-          Google Gemini等のAPIキーを入力すると、プレイログに基づいた最新AI診断・動的プロンプトが利用可能になります。（未入力でもビルトインAI診断が動作します）
+          OpenRouterやGoogle Gemini等のAPIキーを入力すると、プレイログに基づいた最新AI診断や「すぐ効く！特効処方箋」が利用可能になります。（未入力でもビルトインAI診断・処方箋が動作します）
         </p>
         
         <div class="settings-group">
           <label class="settings-label" for="settings-ai-model-select">AIモデル指定</label>
           <select id="settings-ai-model-select" class="input-select" style="width:100%; margin-bottom:8px;">
-            <option value="gemini-1.5-flash">Google Gemini 1.5 Flash (推奨・高速)</option>
+            <option value="openrouter">OpenRouter (推奨・OpenAI互換 / Claude・Llama・DeepSeek対応)</option>
+            <option value="gpt-4o-mini">OpenAI GPT-4o mini (OpenAI公式)</option>
             <option value="gemini-2.0-flash">Google Gemini 2.0 Flash (最新世代・爆速)</option>
+            <option value="gemini-1.5-flash">Google Gemini 1.5 Flash (推奨・高速)</option>
             <option value="gemini-1.5-pro">Google Gemini 1.5 Pro (高精度分析)</option>
-            <option value="gpt-4o-mini">OpenAI GPT-4o mini (OpenAI API互換)</option>
+            <option value="custom-openai">カスタム OpenAI互換 (Groq, Ollama, DeepSeek等)</option>
             <option value="custom">カスタム（自由入力）</option>
           </select>
-          <input type="text" id="settings-ai-model" class="input-text" style="width:100%;" placeholder="モデル名（例: gemini-1.5-flash）" value="gemini-1.5-flash">
+          <input type="text" id="settings-ai-model" class="input-text" style="width:100%;" placeholder="モデル名（例: openai/gpt-4o-mini, gemini-1.5-flash）" value="gemini-1.5-flash">
         </div>
 
         <div class="settings-group">
           <label class="settings-label" for="settings-ai-endpoint">APIエンドポイントURL</label>
           <input type="text" id="settings-ai-endpoint" class="input-text" style="width:100%; font-size:0.8rem;" value="https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent">
+          <div style="font-size:0.7rem; color:var(--text-muted); margin-top:4px;">
+            ※OpenAI互換（https://openrouter.ai/api/v1 や Groq, Ollama等）対応。URL末尾の /chat/completions は自動補完されます。
+          </div>
         </div>
 
         <div class="settings-group">
           <label class="settings-label" for="settings-ai-key">APIキー (ブラウザ内にローカル保存)</label>
-          <input type="password" id="settings-ai-key" class="input-text" style="width:100%;" placeholder="Geminiキー: AIzaSy... / OpenAIキー: sk-...">
+          <input type="password" id="settings-ai-key" class="input-text" style="width:100%;" placeholder="OpenRouterキー: sk-or-... / Geminiキー: AIzaSy... / OpenAI: sk-...">
+          
+          <div style="display:flex; gap:8px; margin-top:10px;">
+            <button id="settings-ai-test-btn" class="diag-btn" style="flex:1; padding:10px;" type="button">
+              🔌 接続テスト（確認）
+            </button>
+          </div>
+          <div id="settings-ai-test-result" class="ai-test-result-box hidden"></div>
+        </div>
+
+        <!-- 注意書き・免責事項 -->
+        <div class="ai-disclaimer-note">
+          ⚠️ <strong>注意事項:</strong> 生成AIは不正確な情報や誤った回答を出力することがあります。重要な事実関係や学習・試験対策の際は、公式テキストや原典をご確認ください。
         </div>
       </div>
 
@@ -488,6 +541,72 @@
       <span>設定</span>
     </button>
   </nav>
+
+  <!-- ====================================================================
+       Prescription Modal (特効学習処方箋カルテ)
+       ==================================================================== -->
+  <div id="prescription-modal" class="modal-overlay hidden">
+    <div class="modal-card rx-modal-card">
+      <div class="rx-modal-header">
+        <div class="rx-clinic-badge">🏥 SPEED QUIZ 認知行動クリニック</div>
+        <div class="rx-card-title">特効学習処方箋 (PRESCRIPTION)</div>
+        <div class="rx-meta-grid">
+          <div><span class="rx-meta-lbl">カルテNo:</span> <span id="rx-modal-id" class="rx-meta-val">RX-7721</span></div>
+          <div><span class="rx-meta-lbl">患者氏名:</span> <span id="rx-modal-patient" class="rx-meta-val">チャレンジャー</span> 様</div>
+          <div><span class="rx-meta-lbl">発行日:</span> <span id="rx-modal-date" class="rx-meta-val">2026/09/06</span></div>
+          <div><span class="rx-meta-lbl">担当処方医:</span> <span id="rx-modal-doctor" class="rx-meta-val">Dr.AI 認知分析室</span></div>
+        </div>
+      </div>
+
+      <div class="rx-modal-body">
+        <!-- 診断病名バッジ -->
+        <div class="rx-section-title">🩺 診断病名・弱点シンドローム</div>
+        <div id="rx-modal-syndrome" class="rx-syndrome-pill">類似概念混同シンドローム</div>
+        <div class="rx-sub-meta">
+          <span>深刻度: <strong id="rx-modal-severity">中等度</strong></span>
+          <span>重点治療分野: <strong id="rx-modal-category">一般教養</strong></span>
+        </div>
+
+        <!-- 脳内病理分析 -->
+        <div class="rx-section-title">🔬 脳内病理分析（思考の癖・認知トラップ）</div>
+        <div id="rx-modal-pathology" class="rx-box-content"></div>
+
+        <!-- 特効薬3選 -->
+        <div class="rx-section-title">💊 即効特効薬 3箇条</div>
+        <div id="rx-modal-meds" class="rx-meds-container"></div>
+
+        <!-- Dr.AI激励所見 -->
+        <div class="rx-section-title">👨‍⚕️ Dr.AIからの激励所見</div>
+        <div id="rx-modal-comment" class="rx-doctor-comment"></div>
+
+        <!-- 免責事項・注意事項 -->
+        <div class="rx-disclaimer">
+          ⚠️ 本処方箋はAI学習支援アルゴリズムによるアドバイスです。生成AIは不正確な情報を出力することがありますので、重要な事実関係や試験対策は公式テキスト・原典をご確認ください。
+        </div>
+      </div>
+
+      <!-- モーダルアクションボタン -->
+      <div class="rx-modal-actions">
+        <button id="rx-modal-revenge-btn" class="cta-revenge-btn" type="button">
+          ⚡ この弱点を30秒リベンジマッチで治療！
+        </button>
+        <div style="display:flex; gap:8px;">
+          <button id="rx-modal-copy-btn" class="diag-btn" style="flex:1; padding:10px;" type="button">📋 カルテコピー</button>
+          <button id="rx-modal-share-btn" class="diag-btn" style="flex:1; padding:10px;" type="button">📢 シェア</button>
+          <button id="rx-modal-close-btn" class="diag-btn" style="width:70px; padding:10px;" type="button">閉じる</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Prescription Loading Spinner Overlay -->
+  <div id="prescription-loading" class="modal-overlay hidden">
+    <div class="rx-loading-box">
+      <div class="cyber-spinner"></div>
+      <div class="rx-loading-title">🩺 Dr.AIが弱点カルテを調剤中...</div>
+      <div class="rx-loading-desc">思考の癖・認知トラップを精密分析しています</div>
+    </div>
+  </div>
 
   <!-- PWA Service Worker Registration & Module Script -->
   <script type="module" src="js/app.js"></script>

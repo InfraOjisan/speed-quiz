@@ -1267,3 +1267,435 @@ input:checked + .slider-round:before {
 .hidden {
   display: none !important;
 }
+
+/* --------------------------------------------------------------------------
+   Prescription Card & Progress (弱点処方箋)
+   -------------------------------------------------------------------------- */
+.prescription-panel {
+  border: 1px solid rgba(0, 245, 212, 0.4);
+  background: linear-gradient(135deg, rgba(16, 37, 50, 0.85), rgba(11, 24, 34, 0.95));
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 245, 212, 0.15);
+}
+
+.prescription-panel.unlocked {
+  border-color: rgba(0, 245, 212, 0.8);
+  box-shadow: 0 0 25px rgba(0, 245, 212, 0.3), inset 0 0 15px rgba(0, 245, 212, 0.1);
+}
+
+.prescription-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+  gap: 8px;
+}
+
+.prescription-title-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.prescription-icon {
+  font-size: 1.8rem;
+  filter: drop-shadow(0 0 8px rgba(0, 245, 212, 0.6));
+}
+
+.prescription-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #00f5d4;
+  letter-spacing: 0.5px;
+}
+
+.prescription-subtitle {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+  line-height: 1.3;
+}
+
+.rx-status-badge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 6px;
+  white-space: nowrap;
+}
+
+.rx-status-badge.locked {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-muted);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.rx-status-badge.ready {
+  background: rgba(0, 245, 212, 0.2);
+  color: #00f5d4;
+  border: 1px solid #00f5d4;
+  animation: pulseNeon 1.5s infinite alternate;
+}
+
+.rx-progress-wrap {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.rx-progress-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+.rx-progress-bar-bg {
+  width: 100%;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.rx-progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #00bbf9, #00f5d4);
+  border-radius: 4px;
+  transition: width 0.4s ease;
+}
+
+.rx-help-text {
+  font-size: 0.7rem;
+  color: var(--accent-cyan);
+  margin-top: 6px;
+}
+
+.cta-prescription-btn {
+  width: 100%;
+  padding: 14px;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  font-weight: 800;
+  border: none;
+  cursor: pointer;
+  background: linear-gradient(135deg, #00f5d4, #00bbf9);
+  color: #0b0c10;
+  box-shadow: 0 4px 15px rgba(0, 245, 212, 0.4);
+  transition: all 0.2s ease;
+  touch-action: manipulation;
+}
+
+.cta-prescription-btn:not(:disabled):hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 22px rgba(0, 245, 212, 0.6);
+}
+
+.cta-prescription-btn:disabled {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-muted);
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+.cta-secondary-rx-btn {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  background: rgba(0, 245, 212, 0.08);
+  border: 1px solid rgba(0, 245, 212, 0.4);
+  color: #00f5d4;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.cta-secondary-rx-btn:hover {
+  background: rgba(0, 245, 212, 0.18);
+}
+
+/* --------------------------------------------------------------------------
+   AI Settings: Connection Test & Disclaimer
+   -------------------------------------------------------------------------- */
+.ai-test-result-box {
+  margin-top: 10px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 0.78rem;
+  line-height: 1.4;
+  word-break: break-all;
+}
+
+.ai-test-result-box.success {
+  background: rgba(0, 245, 212, 0.12);
+  border: 1px solid rgba(0, 245, 212, 0.5);
+  color: #00f5d4;
+}
+
+.ai-test-result-box.error {
+  background: rgba(255, 75, 75, 0.12);
+  border: 1px solid rgba(255, 75, 75, 0.5);
+  color: #ff6b6b;
+}
+
+.ai-test-result-box.testing {
+  background: rgba(0, 187, 249, 0.12);
+  border: 1px solid rgba(0, 187, 249, 0.5);
+  color: #00bbf9;
+}
+
+.ai-disclaimer-note {
+  margin-top: 14px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  background: rgba(255, 204, 0, 0.08);
+  border-left: 3px solid #ffcc00;
+  font-size: 0.72rem;
+  color: #ffd166;
+  line-height: 1.4;
+}
+
+/* --------------------------------------------------------------------------
+   Prescription Modal (サイバーメディカルカルテ)
+   -------------------------------------------------------------------------- */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 16px;
+}
+
+.modal-card {
+  background: linear-gradient(145deg, #121822, #0d1219);
+  border: 1px solid rgba(0, 245, 212, 0.4);
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6), 0 0 25px rgba(0, 245, 212, 0.2);
+  width: 100%;
+  max-width: 520px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: modalPop 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes modalPop {
+  0% { transform: scale(0.92); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.rx-modal-header {
+  background: linear-gradient(135deg, rgba(0, 245, 212, 0.15), rgba(0, 187, 249, 0.08));
+  padding: 16px 20px 12px;
+  border-bottom: 1px solid rgba(0, 245, 212, 0.25);
+}
+
+.rx-clinic-badge {
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: #00f5d4;
+  letter-spacing: 1px;
+  margin-bottom: 2px;
+}
+
+.rx-card-title {
+  font-size: 1.25rem;
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: -0.5px;
+}
+
+.rx-meta-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px 12px;
+  margin-top: 8px;
+  font-size: 0.72rem;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 6px 10px;
+  border-radius: 8px;
+}
+
+.rx-meta-lbl {
+  color: var(--text-muted);
+}
+
+.rx-meta-val {
+  color: #00f5d4;
+  font-weight: 700;
+}
+
+.rx-modal-body {
+  padding: 16px 20px;
+  overflow-y: auto;
+  flex: 1;
+  -webkit-overflow-scrolling: touch;
+}
+
+.rx-section-title {
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: var(--accent-cyan);
+  margin-top: 14px;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.rx-section-title:first-child {
+  margin-top: 0;
+}
+
+.rx-syndrome-pill {
+  background: linear-gradient(135deg, rgba(247, 37, 133, 0.2), rgba(114, 9, 183, 0.25));
+  border: 1px solid #f72585;
+  color: #ff70a6;
+  font-size: 1.05rem;
+  font-weight: 900;
+  padding: 10px 14px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 0 12px rgba(247, 37, 133, 0.2);
+}
+
+.rx-sub-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  margin-top: 6px;
+  padding: 0 4px;
+}
+
+.rx-sub-meta strong {
+  color: #fff;
+}
+
+.rx-box-content {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  padding: 12px;
+  font-size: 0.84rem;
+  line-height: 1.55;
+  color: var(--text-secondary);
+}
+
+.rx-meds-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.rx-med-card {
+  background: rgba(0, 245, 212, 0.05);
+  border: 1px solid rgba(0, 245, 212, 0.2);
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+
+.rx-med-name {
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: #00f5d4;
+  margin-bottom: 2px;
+}
+
+.rx-med-dosage {
+  font-size: 0.7rem;
+  color: #00bbf9;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.rx-med-instruction {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  line-height: 1.45;
+}
+
+.rx-doctor-comment {
+  background: linear-gradient(135deg, rgba(0, 187, 249, 0.08), rgba(0, 245, 212, 0.05));
+  border-left: 3px solid #00bbf9;
+  border-radius: 4px 10px 10px 4px;
+  padding: 10px 12px;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: var(--text-primary);
+}
+
+.rx-disclaimer {
+  margin-top: 14px;
+  padding: 8px 10px;
+  background: rgba(255, 204, 0, 0.06);
+  border: 1px solid rgba(255, 204, 0, 0.2);
+  border-radius: 8px;
+  font-size: 0.68rem;
+  color: #ffd166;
+  line-height: 1.4;
+}
+
+.rx-modal-actions {
+  padding: 12px 20px 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(10, 14, 20, 0.8);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* --------------------------------------------------------------------------
+   Loading Spinner
+   -------------------------------------------------------------------------- */
+.rx-loading-box {
+  background: rgba(18, 24, 34, 0.95);
+  border: 1px solid rgba(0, 245, 212, 0.5);
+  border-radius: 16px;
+  padding: 24px 30px;
+  text-align: center;
+  box-shadow: 0 0 30px rgba(0, 245, 212, 0.3);
+}
+
+.cyber-spinner {
+  width: 44px;
+  height: 44px;
+  margin: 0 auto 16px;
+  border: 3px solid rgba(0, 245, 212, 0.2);
+  border-top-color: #00f5d4;
+  border-right-color: #00bbf9;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.rx-loading-title {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #00f5d4;
+  margin-bottom: 6px;
+}
+
+.rx-loading-desc {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+

@@ -5,6 +5,8 @@
  * with MBTI-style codes, dynamic avatars, and LLM API support.
  */
 
+import { AIService } from './ai-service.js';
+
 class DiagnosisEngine {
   constructor() {
     this.archetypes = this.initArchetypes();
@@ -587,59 +589,8 @@ class DiagnosisEngine {
   "imagePrompt": "アバター生成用英語プロンプト"
 }`;
 
-    const isOpenAI = endpoint.includes('/chat/completions') || endpoint.includes('api.openai.com');
-    let rawText = '';
-
-    if (isOpenAI) {
-      const body = {
-        model: model,
-        messages: [
-          { role: 'system', content: 'You are a helpful AI that only outputs pure JSON.' },
-          { role: 'user', content: prompt }
-        ],
-        temperature: 0.75
-      };
-
-      const res = await fetch(endpoint, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${apiKey}`
-        },
-        body: JSON.stringify(body)
-      });
-
-      if (!res.ok) throw new Error(`OpenAI API error: ${res.status} ${res.statusText}`);
-      const data = await res.json();
-      rawText = data.choices?.[0]?.message?.content || '';
-    } else {
-      if (model && !endpoint.includes(model) && endpoint.includes('googleapis.com')) {
-        endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`;
-      }
-
-      const url = endpoint.includes('?') ? `${endpoint}&key=${apiKey}` : `${endpoint}?key=${apiKey}`;
-
-      const body = {
-        contents: [{
-          parts: [{ text: prompt }]
-        }],
-        generationConfig: {
-          temperature: 0.75,
-          maxOutputTokens: 900
-        }
-      };
-
-      const res = await fetch(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body)
-      });
-
-      if (!res.ok) throw new Error(`Gemini API error: ${res.status} ${res.statusText}`);
-      const data = await res.json();
-      rawText = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
-    }
-
+    const systemPrompt = 'You are a helpful AI that only outputs pure JSON. Do not include markdown code block formatting.';
+    const rawText = await AIService.callChatCompletion(prompt, systemPrompt, settings, 900);
     if (!rawText) throw new Error('Empty response from LLM API');
 
     const cleanText = rawText.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim();
