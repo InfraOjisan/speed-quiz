@@ -3,7 +3,7 @@
  * Enables fast loading and offline play
  */
 
-const CACHE_NAME = 'speedquiz-cache-v4';
+const CACHE_NAME = 'speedquiz-cache-v5';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
@@ -18,6 +18,7 @@ const ASSETS_TO_CACHE = [
   './js/data-loader.js',
   './js/diagnosis.js',
   './js/quiz.js',
+  './generated_quiz_all.json',
   './quiz_questions_200.json',
   './hard_quiz.json',
   './icons/icon-192.svg',

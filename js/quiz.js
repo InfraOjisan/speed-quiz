@@ -172,7 +172,7 @@ export class QuizGame {
   }
 
   isCurrentBonus() {
-    return this.currentQuestion && (this.currentQuestion.category === '難関ボーナス' || this.bonusCutInActive);
+    return this.currentQuestion && (this.currentQuestion.category === '難問ボーナス' || this.currentQuestion.category === '難関ボーナス' || this.bonusCutInActive);
   }
 
   // ユーザーの回答処理（YES=true, NO=false）
