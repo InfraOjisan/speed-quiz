@@ -504,9 +504,10 @@ class SpeedQuizApp {
     if (rxGenBtn) {
       rxGenBtn.addEventListener('click', async () => {
         sound.playClick();
+        const allWeaknesses = storage.getAllWeaknesses();
         const pending = storage.getPendingWeaknesses();
-        if (pending.length === 0) {
-          alert('未克服の弱点問題がありません。クイズをプレイして弱点をストックしましょう！');
+        if (allWeaknesses.length === 0) {
+          alert('弱点ノートに履歴がありません。クイズをプレイして新しい問題に挑戦しましょう！');
           return;
         }
 
@@ -516,7 +517,16 @@ class SpeedQuizApp {
         try {
           const player = storage.getPlayer();
           const settings = storage.getSettings();
-          const prescription = await PrescriptionEngine.generatePrescription(pending, player, settings);
+          const stats = storage.getStats();
+          const categoryProgress = storage.data.categoryProgress || {};
+          const prescription = await PrescriptionEngine.generatePrescription(
+            allWeaknesses,
+            pending,
+            categoryProgress,
+            player,
+            settings,
+            stats
+          );
           this.currentPrescription = prescription;
           this.displayPrescriptionModal(prescription);
         } catch (err) {
@@ -1064,8 +1074,8 @@ class SpeedQuizApp {
 
     if (countEl) countEl.textContent = pendingWeaknesses.length;
 
-    // 処方箋カードのアンロック状況を判定・更新
-    const rxStatus = PrescriptionEngine.checkUnlockStatus(stats, pendingWeaknesses);
+    // 処方箋カードのアンロック状況を判定・更新（全弱点履歴と未克服の両方を参照）
+    const rxStatus = PrescriptionEngine.checkUnlockStatus(stats, weaknesses, pendingWeaknesses);
     const cardEl = document.getElementById('revenge-prescription-card');
     const badgeEl = document.getElementById('rx-unlock-badge');
     const progText = document.getElementById('rx-progress-text');
@@ -1130,7 +1140,16 @@ class SpeedQuizApp {
 
     document.getElementById('rx-modal-syndrome').textContent = rx.syndromeName;
     document.getElementById('rx-modal-severity').textContent = rx.severity || '中等度';
-    document.getElementById('rx-modal-category').textContent = rx.primaryWeakCategory || '一般教養';
+    document.getElementById('rx-modal-category').textContent = rx.weakCategory || rx.primaryWeakCategory || '一般教養';
+
+    // 科目別・学習＆克服特性プロファイル
+    const weakEl = document.getElementById('rx-modal-weak-cat');
+    const recEl = document.getElementById('rx-modal-recovering-cat');
+    const strEl = document.getElementById('rx-modal-strong-cat');
+    if (weakEl) weakEl.textContent = rx.weakCategory || rx.metrics?.weakSubjectDetail || '特になし';
+    if (recEl) recEl.textContent = rx.recoveringCategory || rx.metrics?.recoveringSubjectDetail || '特になし';
+    if (strEl) strEl.textContent = rx.strongCategory || rx.metrics?.strongSubjectDetail || '全般良好';
+
     document.getElementById('rx-modal-pathology').textContent = rx.pathology;
 
     const medsEl = document.getElementById('rx-modal-meds');

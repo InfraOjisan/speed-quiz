@@ -1587,6 +1587,59 @@ input:checked + .slider-round:before {
   color: #fff;
 }
 
+/* --------------------------------------------------------------------------
+   Learning Profile (弱点・前向き克服・得意科目)
+   -------------------------------------------------------------------------- */
+.rx-learning-profile {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+
+.rx-profile-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.78rem;
+}
+
+.rx-profile-icon {
+  font-size: 0.95rem;
+  flex-shrink: 0;
+}
+
+.rx-profile-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 6px;
+  align-items: baseline;
+}
+
+.rx-profile-label {
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.rx-profile-item.weak .rx-profile-val {
+  color: #ff6b6b;
+  font-weight: 800;
+}
+
+.rx-profile-item.recovering .rx-profile-val {
+  color: #00f5d4;
+  font-weight: 800;
+  text-shadow: 0 0 8px rgba(0, 245, 212, 0.4);
+}
+
+.rx-profile-item.strong .rx-profile-val {
+  color: #ffd166;
+  font-weight: 800;
+}
+
 .rx-box-content {
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.08);
